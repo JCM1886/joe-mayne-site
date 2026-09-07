@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Joe Mayne</title>
+<meta name="description" content="Get in touch with Joe Mayne — Bristol-based Senior Digital Marketer, open to remote, hybrid or Bristol-based roles in sustainability and purpose-driven organisations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a class="nav__brand" href="index.html">Joe <span>Mayne</span></a>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="process.html">My Process</a></li>
+      <li><a href="branding.html">Branding</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="strategy.html">Strategy</a></li>
+      <li><a href="personal.html">Personal</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Let's talk</h1>
+      <p class="lede">I'm currently exploring new opportunities in marketing leadership, particularly with sustainability and purpose-driven organisations. Based in Bristol, UK — open to remote, hybrid or Bristol-based roles.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container grid grid--2">
+      <div>
+        <span class="eyebrow">Direct</span>
+        <p class="needs-input">Needs your input</p>
+        <p>
+          Email: <a href="mailto:REPLACE_WITH_YOUR_EMAIL@example.com">REPLACE_WITH_YOUR_EMAIL@example.com</a><br>
+          LinkedIn: <a href="#" data-needs-input="linkedin-url">add your LinkedIn URL</a><br>
+          GitHub: <a href="https://github.com/JCM1886" target="_blank" rel="noopener">github.com/JCM1886</a>
+        </p>
+        <p class="callout"><strong>How to wire this up:</strong> replace the placeholder email above (in <code>contact.html</code>, and in the form's <code>action</code> attribute below) with your real address, and swap the LinkedIn <code>#</code> for your profile URL.</p>
+      </div>
+
+      <div>
+        <span class="eyebrow">Send a message</span>
+        <form action="mailto:REPLACE_WITH_YOUR_EMAIL@example.com" method="post" enctype="text/plain">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="email">Your email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button class="btn btn--primary" type="submit">Send</button>
+        </form>
+        <p class="callout" style="margin-top:16px;"><strong>Note:</strong> this form uses a <code>mailto:</code> action, which opens the visitor's own email client with the message pre-filled — it works with zero backend, which suits GitHub Pages. If you deploy on Netlify instead, swap this for Netlify's built-in form handling (add <code>data-netlify="true"</code> to the form and it submits silently, no mail client popup) — see the brief's Part 5 for the host comparison.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <small>© 2026 Joe Mayne. Bristol, UK.</small>
+    <nav>
+      <a href="contact.html">Contact</a>
+      <a href="https://github.com/JCM1886" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
