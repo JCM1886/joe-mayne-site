@@ -62,11 +62,7 @@ input" badges) as well as here:
 
 - **13 Branding project descriptions** — what each was, your role, the
   outcome. See `branding.html` / `content/branding.md`.
-- **13 Branding cover images** — these already exist as public files from
-  earlier Wix Media Manager work. Direct links are listed in
-  `content/branding.md`. **They could not be downloaded automatically** —
-  this build environment's network policy blocks `static.wixstatic.com` — so
-  download them yourself and drop them into
+- **13 Branding cover images** — drop them into
   `assets/images/branding/<project>/`, matching the filenames referenced in
   `branding.html`.
 - **Photography** — real photos sorted into event / wedding / corporate /
