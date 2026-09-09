@@ -431,20 +431,15 @@
         </div>
 
         <!-- Real contact form, modeled on 4change.marketing's field
-             layout (name / email / message). Wired for Netlify's
-             built-in form handling — data-netlify="true" plus the
-             matching hidden form-name field is all Netlify needs to
-             detect and handle this form at deploy time, no signup or
-             form ID required. A hidden honeypot field (bot-field)
-             catches basic spam bots; real visitors never see it.
-             Deploying somewhere other than Netlify (e.g. GitHub
-             Pages)? Swap this block for Formspree instead — see
-             README.md "Making the contact form actually send". -->
-        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="contact">
-          <p style="position:absolute; left:-9999px;">
-            <label>Leave this field blank: <input name="bot-field"></label>
-          </p>
+             layout (name / email / message). Wired for Formspree,
+             since this deploys on GitHub Pages (no backend of its
+             own): sign up free at formspree.io, create a form, and
+             swap YOUR_FORM_ID below for the real one. Until then the
+             form won't actually send anywhere, so the mailto: link
+             underneath is the reliable fallback. (Moved to Netlify
+             later? Swap back to data-netlify="true" — see
+             README.md "Making the contact form actually send".) -->
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
           <div class="form-row">
             <div>
               <label for="cf-name">Name</label>
@@ -462,7 +457,7 @@
         <p class="contact-alt">Prefer email direct? <a href="mailto:joemichaelmayne@gmail.com">joemichaelmayne@gmail.com</a></p>
 
         <div class="editor-flag" style="text-align:left; margin-top:32px;">
-          <strong>Needs your input:</strong> add your real LinkedIn URL to the ghost button above (GitHub is already filled in). The contact form is wired for Netlify — it'll work automatically once this deploys there, nothing further to do. If you deploy on GitHub Pages instead, this form needs swapping to Formspree first (see README.md), since GitHub Pages has no backend of its own.
+          <strong>Needs your input:</strong> add your real LinkedIn URL to the ghost button above (GitHub is already filled in), and swap <code>YOUR_FORM_ID</code> in the form's <code>action</code> for a real Formspree form ID (free at formspree.io — sign up, create a form, copy the ID in). Until then the form won't actually send anywhere, so the <code>mailto:</code> link above is the reliable fallback.
         </div>
       </div>
     </div>

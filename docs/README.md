@@ -109,19 +109,17 @@ with `position:relative`.
 
 ### Making the contact form actually send
 
-The form is now wired for **Netlify's built-in form handling** —
-`data-netlify="true"` plus a matching hidden `form-name` field are already
-on the `<form>` tag, along with a hidden honeypot field for basic spam
-protection. Nothing further to do: the moment this deploys on Netlify, the
-form works, no signup or form ID required.
+The form is wired for **Formspree**, since this deploys on GitHub Pages
+(no backend of its own). The `action` currently points at
+`https://formspree.io/f/YOUR_FORM_ID` — that's a placeholder. Sign up free
+at [formspree.io](https://formspree.io), create a form, and swap in your
+real form ID. Until then, the `mailto:` link under the form is the
+reliable fallback.
 
-Deploying somewhere other than Netlify (GitHub Pages, Vercel, Cloudflare
-Pages)? None of those run your form for you, so swap it for
-[Formspree](https://formspree.io) instead: sign up free, create a form, and
-change the `<form>` tag back to
-`<form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">`
-(the Name/Email/Message fields underneath don't need to change). Until
-either is live, the `mailto:` link under the form is the reliable fallback.
+If you ever move to Netlify instead, you can skip Formspree entirely: add
+`data-netlify="true"` and a hidden
+`<input type="hidden" name="form-name" value="contact">` to the `<form>`
+tag and Netlify handles submissions natively, no signup required.
 
 ### Things still flagged as "Needs your input"
 
@@ -136,21 +134,23 @@ your real content:
 
 ## Deploying
 
-This is a plain static site, so any static host works. This folder lives at
-`docs/` inside the `joe-mayne-site` GitHub repo — named that deliberately so
-GitHub Pages' native "serve from `/docs`" option works with zero extra
-config. Two solid options:
+**GitHub Pages** is the deploy target — this folder lives at `docs/` inside
+the `joe-mayne-site` GitHub repo deliberately, so GitHub Pages' native
+"serve from `/docs`" option works with zero extra config:
 
-**Netlify (recommended)** — connect the GitHub repo (`JCM1886/joe-mayne-site`)
-at app.netlify.com and set **Base directory** to `docs`, or drag-and-drop
-this `docs/` folder directly at app.netlify.com/drop for a one-off deploy.
-Free tier includes the working contact form above with zero backend code,
-plus a free subdomain and HTTPS.
+1. Go to the repo's **Settings → Pages**.
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+3. Branch: **`main`**, folder: **`/docs`** → **Save**.
+4. First build takes a minute or two. Live URL:
+   **https://jcm1886.github.io/joe-mayne-site/**
 
-**GitHub Pages** — in the repo's Settings → Pages, set Source to the `main`
-branch, folder `/docs`. Free, and it's the same GitHub account you're
-already pushing to. No built-in form handling — swap the contact form for
-Formspree first (see above), or rely on the `mailto:` link as-is.
+No built-in form handling on GitHub Pages — the contact form is wired for
+Formspree (see above), or falls back to the `mailto:` link as-is until a
+form ID is added.
 
-Either way: push changes to `main` (or re-connect/re-drop on Netlify) and
-the live site updates.
+Push changes to `main` and the live site updates automatically (usually
+within a minute).
+
+(Netlify remains an option later if you ever want deploy previews or its
+built-in form handling — connect the repo at app.netlify.com with **Base
+directory** set to `docs`. Not needed for now.)
