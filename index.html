@@ -82,7 +82,18 @@
 
   <section class="tight">
     <div class="container container--narrow" style="text-align:center;">
-      <p class="pull-quote" style="text-align:left; display:inline-block;">I'm currently exploring new opportunities in marketing leadership, particularly with sustainability and purpose-driven organisations.</p>
+      <!-- Auto-rotating quote carousel. Starts on the first quote,
+           advances every 6s, pauses on hover/focus, and skips the
+           auto-advance entirely for visitors with reduced-motion set.
+           Add more quotes by copying a .quote-carousel__item block —
+           no other changes needed, the dots and timer pick it up
+           automatically. See assets/js/site.js for the logic. -->
+      <div class="quote-carousel" id="quoteCarousel">
+        <blockquote class="quote-carousel__item is-active">I'm currently exploring new opportunities in marketing leadership, particularly with sustainability and purpose-driven organisations.</blockquote>
+        <blockquote class="quote-carousel__item needs-input">Needs your input — add a second real quote here (a line from a reference, a review, something someone's said about working with you).</blockquote>
+        <blockquote class="quote-carousel__item needs-input">Needs your input — add a third real quote here.</blockquote>
+      </div>
+      <div class="quote-carousel__dots" id="quoteDots" aria-hidden="true"></div>
       <div class="btn-row" style="justify-content:center;">
         <a class="btn btn--primary" href="strategy.html">View my work</a>
         <a class="btn btn--ghost" href="contact.html">Get in touch</a>

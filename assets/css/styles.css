@@ -381,6 +381,50 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin: 1.6em 0;
 }
 
+/* ---------- quote carousel (home) ---------- */
+.quote-carousel {
+  position: relative;
+  min-height: 7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quote-carousel__item {
+  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0 8px;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.quote-carousel__item.is-active {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.quote-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 8px;
+}
+.quote-carousel__dots button {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--line);
+  cursor: pointer;
+}
+.quote-carousel__dots button.is-active { background: var(--clay-deep); }
+
 /* ---------- forms ---------- */
 .field { margin-bottom: 18px; }
 .field label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
