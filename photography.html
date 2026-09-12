@@ -38,7 +38,35 @@
     </div>
   </section>
 
-  <section class="tight">
+  <!-- =========================================================
+       PHOTO INDEX — jump-to-category list with drifting images
+       Recreates the mechanic Joe pointed at: a plain text list
+       sitting beside a few images that gently drift sideways with
+       scroll speed and sit at a fixed slight rotation, rather than a
+       flat static collage — rebuilt from scratch in plain CSS/JS
+       (custom properties driven by site.js, not the reference's
+       code, images, or client names), using Joe's own category
+       names and real photos. See "photography index" in site.js for
+       the scroll-velocity drift, and the equivalent comment in
+       styles.css for the layout. Hidden below 900px (drops to a
+       plain list) since there's no room for the floats to breathe
+       and drift is disabled entirely under prefers-reduced-motion. -->
+  <section class="tight photo-index">
+    <div class="container">
+      <ul class="photo-index__list">
+        <li class="photo-index__item"><a href="#event">Event</a></li>
+        <li class="photo-index__item"><a href="#wedding">Wedding</a></li>
+        <li class="photo-index__item"><a href="#corporate">Corporate</a></li>
+        <li class="photo-index__item"><a href="#travel">Travel</a></li>
+        <img class="photo-index__float" src="assets/images/photography/corporate/corporate-workshop-ecoact.jpg" alt="" style="--base-x:-90; --rotation:-4deg; top:18%;">
+        <img class="photo-index__float" src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="" style="--base-x:40; --rotation:3deg; top:42%;">
+        <img class="photo-index__float" src="assets/images/photography/corporate/corporate-conference-atos.jpg" alt="" style="--base-x:-30; --rotation:5deg; top:68%;">
+        <img class="photo-index__float" src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="" style="--base-x:110; --rotation:-2deg; top:90%;">
+      </ul>
+    </div>
+  </section>
+
+  <section class="tight" id="event">
     <div class="container">
       <span class="eyebrow">Event</span>
       <h2>Event photography</h2>
@@ -51,7 +79,7 @@
     </div>
   </section>
 
-  <section class="tight">
+  <section class="tight" id="wedding">
     <div class="container">
       <span class="eyebrow">Wedding</span>
       <h2>Wedding photography</h2>
@@ -64,20 +92,21 @@
     </div>
   </section>
 
-  <section class="tight">
+  <section class="tight" id="corporate">
     <div class="container">
       <span class="eyebrow">Corporate</span>
       <h2>Corporate photography</h2>
       <div class="grid grid--4">
-        <div class="media-placeholder"><span class="media-placeholder__label">Corporate photo</span></div>
-        <div class="media-placeholder"><span class="media-placeholder__label">Corporate photo</span></div>
-        <div class="media-placeholder"><span class="media-placeholder__label">Corporate photo</span></div>
-        <div class="media-placeholder"><span class="media-placeholder__label">Corporate photo</span></div>
+        <img src="assets/images/photography/corporate/corporate-headshot-1.jpg" alt="Corporate headshot of a woman smiling outdoors" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img src="assets/images/photography/corporate/corporate-headshot-2.jpg" alt="Corporate headshot of a woman smiling in a park" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img src="assets/images/photography/corporate/corporate-workshop-ecoact.jpg" alt="Two colleagues sharing a laugh during a workshop session" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img src="assets/images/photography/corporate/corporate-conference-atos.jpg" alt="A colleague speaking animatedly at a conference event" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img src="assets/images/photography/corporate/corporate-workshop-team.jpg" alt="A team laughing together around a table during a workshop" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
       </div>
     </div>
   </section>
 
-  <section class="tight">
+  <section class="tight" id="travel">
     <div class="container">
       <span class="eyebrow">Travel</span>
       <h2>Travel photography</h2>
