@@ -243,6 +243,109 @@ document.addEventListener("DOMContentLoaded", function () {
     carousel.addEventListener("focusout", start);
   }
 
+  // ---- photography index: scroll-velocity image drift ----
+  // Each .photo-index__float image's base position/rotation is fixed
+  // via inline --base-x/--rotation custom properties in the HTML;
+  // this only ever nudges a separate --drift property in the same
+  // translateX() expression (see .photo-index__float in styles.css),
+  // so it adds a sideways push proportional to how fast the page is
+  // scrolling without fighting the base layout. Velocity is damped
+  // each frame so the images drift back to rest shortly after
+  // scrolling stops, and each image is staggered slightly (by index)
+  // so they don't all move in lockstep. Skipped entirely under
+  // prefers-reduced-motion - the CSS base position is enough there.
+  (function () {
+    var floats = Array.prototype.slice.call(document.querySelectorAll(".photo-index__float"));
+    if (!floats.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var lastScrollY = window.scrollY;
+    var velocity = 0;
+
+    function tick() {
+      var currentY = window.scrollY;
+      var delta = currentY - lastScrollY;
+      lastScrollY = currentY;
+      velocity += (delta - velocity) * 0.2;
+      var drift = Math.max(-40, Math.min(40, velocity * 2.2));
+      floats.forEach(function (el, i) {
+        var eased = drift * (1 - i * 0.12);
+        el.style.setProperty("--drift", eased.toFixed(2));
+      });
+      window.requestAnimationFrame(tick);
+    }
+    window.requestAnimationFrame(tick);
+  })();
+
+  // ---- process page: animated timeline (scroll-reveal + progress line) ----
+  // Each .timeline__item fades/slides in (and its dot pops in) the
+  // first time it enters the viewport, via IntersectionObserver. A
+  // .timeline__progress bar is added down the base line and grows as
+  // the timeline scrolls through view, giving a sense of "how far
+  // along" independent of the reveal animation. Falls back to
+  // everything visible, no animation, under prefers-reduced-motion or
+  // if IntersectionObserver isn't supported.
+  (function () {
+    var timeline = document.querySelector(".timeline");
+    if (!timeline) return;
+    var items = Array.prototype.slice.call(timeline.querySelectorAll(".timeline__item"));
+    var reduceMotionTimeline = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var progress = document.createElement("div");
+    progress.className = "timeline__progress";
+    timeline.appendChild(progress);
+
+    function updateProgress() {
+      var rect = timeline.getBoundingClientRect();
+      var viewportH = window.innerHeight;
+      // Starts filling a bit before the timeline reaches the vertical
+      // centre of the screen, finishes once its bottom nears the top
+      // third - so it doesn't sit at 0% or 100% for most of the scroll.
+      var start = viewportH * 0.85;
+      var end = viewportH * 0.25;
+      var total = rect.height + (start - end);
+      var scrolled = start - rect.top;
+      var fraction = Math.max(0, Math.min(1, total > 0 ? scrolled / total : 1));
+      progress.style.height = fraction * 100 + "%";
+    }
+
+    if (reduceMotionTimeline || !("IntersectionObserver" in window)) {
+      items.forEach(function (item) {
+        item.classList.add("is-visible");
+      });
+      progress.style.height = "100%";
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
+    );
+    items.forEach(function (item) {
+      observer.observe(item);
+    });
+
+    var timelineTicking = false;
+    window.addEventListener("scroll", function () {
+      if (!timelineTicking) {
+        window.requestAnimationFrame(function () {
+          updateProgress();
+          timelineTicking = false;
+        });
+        timelineTicking = true;
+      }
+    });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+  })();
+
   // ---- contact form (submits to Formspree via fetch, no page leave) ----
   // Progressive enhancement: without JS the form still works as a plain
   // POST and Formspree shows its own hosted thank-you page. With JS, we
