@@ -12,6 +12,73 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ---- featured work: curved scroll carousel (home) ----
+  // On every scroll frame, work out each slide's horizontal distance
+  // from the carousel's own centre, normalise it to -1..1, and turn
+  // that into a rotate + upward lift + slight scale-down — the
+  // centred slide ends up upright, largest and lowest, and the rest
+  // fan away either side the further they've scrolled from centre.
+  // The caption pill below tracks whichever slide is currently
+  // closest to centre.
+  (function () {
+    var track = document.getElementById("curveTrack");
+    if (!track) return;
+    var carousel = track.parentElement;
+    var slides = Array.prototype.slice.call(track.querySelectorAll(".curve-carousel__slide"));
+    var caption = document.getElementById("curveCaption");
+    var reduceMotionCurve = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var MAX_ROTATE = 16; // degrees, at the edge of the carousel
+    var MAX_LIFT = 46; // px, upward shift at the edge
+    var MAX_SHRINK = 0.12; // fraction smaller at the edge
+
+    function update() {
+      var carouselRect = carousel.getBoundingClientRect();
+      var centerX = carouselRect.left + carouselRect.width / 2;
+      var closestSlide = null;
+      var closestDist = Infinity;
+
+      slides.forEach(function (slide) {
+        var r = slide.getBoundingClientRect();
+        var slideCenter = r.left + r.width / 2;
+        var dist = slideCenter - centerX;
+        var norm = Math.max(-1, Math.min(1, dist / (carouselRect.width / 2)));
+
+        if (!reduceMotionCurve) {
+          var rotate = norm * MAX_ROTATE;
+          var lift = -Math.abs(norm) * MAX_LIFT;
+          var scale = 1 - Math.abs(norm) * MAX_SHRINK;
+          slide.style.transform = "translateY(" + lift + "px) rotate(" + rotate + "deg) scale(" + scale + ")";
+        }
+
+        var absDist = Math.abs(dist);
+        if (absDist < closestDist) {
+          closestDist = absDist;
+          closestSlide = slide;
+        }
+      });
+
+      if (closestSlide && caption) {
+        var label = closestSlide.getAttribute("data-label");
+        var href = closestSlide.getAttribute("data-href");
+        if (label && caption.textContent !== label) caption.textContent = label;
+        if (href) caption.setAttribute("href", href);
+      }
+    }
+
+    var ticking = false;
+    carousel.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          update();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    window.addEventListener("resize", update);
+    update();
+  })();
+
   // ---- hero floating-image parallax (home) ----
   // Subtle depth effect: floating work tiles drift slightly toward
   // the cursor. Skipped entirely on touch devices (no meaningful

@@ -458,40 +458,62 @@ section + section { border-top: 1px solid var(--line-soft); }
 .media-placeholder--wide { aspect-ratio: 16 / 9; }
 .media-placeholder--tall { aspect-ratio: 3 / 4; }
 
-/* ---------- featured work carousel ---------- */
-/* Plain horizontal scroll-snap strip — no JS, no library. Bleeds to
-   the edge of the viewport on the right so it reads as a proper
-   carousel rather than a cramped row inside the container; the first
-   slide still lines up with the container's own left edge via the
-   calc() below. */
+/* ---------- featured work (curved carousel) ---------- */
+/* Large slides on a horizontal scroller; site.js computes each
+   slide's distance from the carousel's centre on every scroll frame
+   and applies rotate + lift + scale from that — centred slide sits
+   upright and largest/lowest, the rest fan away either side the
+   further they scroll from centre. Track padding is roughly half a
+   slide's width so the first/last slides can actually reach centre. */
 .featured-work h2 { margin-top: 0.2em; }
-.work-carousel { overflow-x: auto; scrollbar-width: thin; }
-.work-carousel__track {
-  display: flex;
-  gap: 20px;
-  width: max-content;
-  padding: 8px calc((100vw - min(100vw, var(--max))) / 2 + 28px) 12px;
+.curve-carousel {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 30px;
 }
-.work-carousel__slide { flex: 0 0 auto; width: min(78vw, 320px); scroll-snap-align: start; }
-.work-carousel { scroll-snap-type: x mandatory; }
-.work-carousel__slide video {
+.curve-carousel__track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  padding: 20px calc(50% - min(35vw, 210px)) 50px;
+}
+.curve-carousel__slide {
+  flex: 0 0 auto;
+  width: min(70vw, 420px);
+  scroll-snap-align: center;
+  will-change: transform;
+}
+.curve-carousel__slide .media-placeholder { border-radius: var(--radius); box-shadow: var(--shadow); }
+.curve-carousel__slide .media-placeholder--tall { aspect-ratio: 4 / 5; }
+.curve-carousel__slide video {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius);
+  box-shadow: var(--shadow);
   background: var(--ink);
 }
-.work-carousel__link {
+.curve-carousel__caption { text-align: center; margin-top: -12px; }
+.curve-carousel__pill {
   display: inline-block;
-  margin-top: 12px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--clay-deep);
+  padding: 10px 26px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--sand);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-decoration: none;
+  transition: background 0.15s ease;
 }
-.work-carousel__link:hover { text-decoration: underline; }
+.curve-carousel__pill:hover { background: var(--clay-deep); color: var(--sand); }
 @media (prefers-reduced-motion: reduce) {
-  .work-carousel { scroll-behavior: auto; }
+  .curve-carousel__slide { transition: none !important; transform: none !important; }
 }
 
 .tag {

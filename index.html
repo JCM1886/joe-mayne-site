@@ -100,57 +100,53 @@
   </section>
 
   <!-- =========================================================
-       FEATURED WORK
-       A horizontally-scrollable strip, in the same spirit as a
-       project carousel Joe shared as a reference — rebuilt as a
-       plain CSS scroll-snap strip (no JS, no library, nothing of the
-       reference's code/content) rather than its actual interaction
-       code. Placeholder slides throughout.
+       FEATURED WORK — curved scroll carousel
+       Recreates the visual mechanic Joe pointed at (large centred
+       slide sitting upright/lowest, side slides progressively
+       rotating and lifting away the further they scroll from
+       centre, one shared caption pill tracking whichever slide is
+       centred) — rebuilt from scratch in plain JS/CSS, not the
+       reference's code, images or content. See the curved-carousel
+       block in site.js for the scroll-driven transform math, and the
+       "featured work (curved)" comment in styles.css for the layout.
 
        To use a real image: swap a slide's .media-placeholder div for
        <img src="assets/images/..." alt="...">, same as anywhere else
-       on the site (README "Adding photos").
-
-       To use an autoplaying video instead (the reference mixed
-       images and video slides): replace the .media-placeholder div
-       with:
+       (README "Adding photos"). For an autoplaying video instead:
          <video autoplay muted loop playsinline
                 src="assets/video/your-file.mp4"></video>
        (must be muted for browsers to autoplay it without a click).
 
-       Each slide's "View project" link currently points at
-       branding.html as a placeholder destination — point it at
-       wherever that specific project actually lives once real work
-       is in place.
+       Each slide's data-label feeds the caption pill; data-href
+       feeds the pill's link. Both are placeholders — set them to the
+       real project name/URL once that work exists.
        ========================================================= -->
   <section class="tight featured-work">
-    <div class="container">
+    <div class="container" style="text-align:center;">
       <span class="eyebrow">Featured Work</span>
-      <h2>A closer look</h2>
+      <h2>Select recent and notable projects</h2>
     </div>
-    <div class="work-carousel">
-      <div class="work-carousel__track">
-        <div class="work-carousel__slide">
+    <div class="curve-carousel" id="curveCarousel">
+      <div class="curve-carousel__track" id="curveTrack">
+        <div class="curve-carousel__slide" data-label="Your work" data-href="branding.html">
           <div class="media-placeholder media-placeholder--tall"><span class="media-placeholder__label">Your work</span></div>
-          <a href="branding.html" class="work-carousel__link">View project</a>
         </div>
-        <div class="work-carousel__slide">
+        <div class="curve-carousel__slide" data-label="Your work" data-href="branding.html">
           <div class="media-placeholder media-placeholder--tall"><span class="media-placeholder__label">Your work</span></div>
-          <a href="branding.html" class="work-carousel__link">View project</a>
         </div>
-        <div class="work-carousel__slide">
+        <div class="curve-carousel__slide" data-label="Your work" data-href="branding.html">
           <div class="media-placeholder media-placeholder--tall"><span class="media-placeholder__label">Your work</span></div>
-          <a href="branding.html" class="work-carousel__link">View project</a>
         </div>
-        <div class="work-carousel__slide">
+        <div class="curve-carousel__slide" data-label="Your work" data-href="branding.html">
           <div class="media-placeholder media-placeholder--tall"><span class="media-placeholder__label">Your work</span></div>
-          <a href="branding.html" class="work-carousel__link">View project</a>
         </div>
-        <div class="work-carousel__slide">
+        <div class="curve-carousel__slide" data-label="Your work" data-href="branding.html">
           <div class="media-placeholder media-placeholder--tall"><span class="media-placeholder__label">Your work</span></div>
-          <a href="branding.html" class="work-carousel__link">View project</a>
         </div>
       </div>
+    </div>
+    <div class="curve-carousel__caption">
+      <a href="branding.html" class="curve-carousel__pill" id="curveCaption">Your work</a>
     </div>
   </section>
 
