@@ -243,6 +243,56 @@ document.addEventListener("DOMContentLoaded", function () {
     carousel.addEventListener("focusout", start);
   }
 
+  // ---- contact form (submits to Formspree via fetch, no page leave) ----
+  // Progressive enhancement: without JS the form still works as a plain
+  // POST and Formspree shows its own hosted thank-you page. With JS, we
+  // intercept the submit, POST it in the background, and show a status
+  // message right here instead.
+  var contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    var formStatus = document.getElementById("formStatus");
+    var submitBtn = contactForm.querySelector("button[type=submit]");
+
+    function setStatus(text, kind) {
+      if (!formStatus) return;
+      formStatus.hidden = false;
+      formStatus.textContent = text;
+      formStatus.className = "form-status" + (kind ? " is-" + kind : "");
+    }
+
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      setStatus("Sending…");
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch(contactForm.action, {
+        method: "POST",
+        body: new FormData(contactForm),
+        headers: { Accept: "application/json" },
+      })
+        .then(function (response) {
+          if (response.ok) {
+            contactForm.reset();
+            setStatus("Thanks — I've got your message and will be in touch soon.", "success");
+          } else {
+            return response.json().then(function (body) {
+              var detail =
+                body && body.errors && body.errors.length
+                  ? body.errors.map(function (err) { return err.message; }).join(", ")
+                  : null;
+              setStatus(detail || "Something went wrong sending that — please try emailing me directly instead.", "error");
+            });
+          }
+        })
+        .catch(function () {
+          setStatus("Something went wrong sending that — please try emailing me directly instead.", "error");
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  }
+
   // ---- click-to-load video embeds ----
   // Keeps pages fast and avoids loading YouTube's player until someone
   // actually wants to watch. Works for both a YouTube ID and a local

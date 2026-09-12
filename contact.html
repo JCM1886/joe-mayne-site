@@ -52,7 +52,14 @@
 
       <div>
         <span class="eyebrow">Send a message</span>
-        <form action="mailto:joemichaelmayne@gmail.com" method="post" enctype="text/plain">
+        <!-- Submits straight to Formspree (https://formspree.io/f/xzebqyzb)
+             via fetch() in assets/js/site.js — no mail client popup, no
+             leaving the page. A confirmation/error message appears in
+             #formStatus below the button. If JavaScript is off, the form
+             still works as a plain POST and Formspree redirects back with
+             its own thank-you page. To point this at a different
+             Formspree form later, change only the action="..." URL. -->
+        <form id="contactForm" action="https://formspree.io/f/xzebqyzb" method="POST">
           <div class="field">
             <label for="name">Name</label>
             <input id="name" name="name" type="text" required>
@@ -66,8 +73,8 @@
             <textarea id="message" name="message" required></textarea>
           </div>
           <button class="btn btn--primary" type="submit">Send</button>
+          <p class="form-status" id="formStatus" hidden></p>
         </form>
-        <p class="callout" style="margin-top:16px;"><strong>Note:</strong> this form uses a <code>mailto:</code> action, which opens the visitor's own email client with the message pre-filled — it works with zero backend, which suits GitHub Pages. If you deploy on Netlify instead, swap this for Netlify's built-in form handling (add <code>data-netlify="true"</code> to the form and it submits silently, no mail client popup) — see the brief's Part 5 for the host comparison.</p>
       </div>
     </div>
   </section>
