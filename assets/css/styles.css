@@ -279,6 +279,30 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 8px;
 }
 .hero__image .media-placeholder__label { font-size: 0.68rem; }
+
+/* Headshot variant: circular instead of the work tiles' rounded
+   square, vertically centred via a negative margin rather than
+   transform — the parallax script in site.js sets .hero__image's
+   transform directly on mousemove, which would silently overwrite
+   (not combine with) a transform-based centering the instant the
+   cursor moved. */
+.hero__image--headshot { margin-top: calc(var(--size, 180px) / -2); }
+.hero__image-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--paper);
+  box-shadow: var(--shadow);
+  background: linear-gradient(160deg, var(--moss-pale), var(--sand-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero__image-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero__image-photo.is-empty { padding: 12px; text-align: center; }
+.hero__image-photo .media-placeholder__label { background: none; border: none; font-size: 0.68rem; }
+
 @keyframes hero-float {
   0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
   50% { transform: translateY(-16px) rotate(calc(var(--tilt, 0deg) * -1)); }

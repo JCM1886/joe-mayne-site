@@ -54,6 +54,18 @@
       <div class="hero__image" style="bottom:12%; right:14%; --size:112px; --delay:3; --tilt:-4deg;">
         <div class="hero__image-inner"><div class="media-placeholder"><span class="media-placeholder__label">Your work</span></div></div>
       </div>
+      <!-- Headshot: same floating/tilt/parallax treatment as the work
+           tiles above, just circular and vertically centred beside the
+           text. Already wired to assets/images/portrait.jpg — upload a
+           file there (exact name) and it replaces this placeholder
+           automatically, same as the old hero's portrait slot did. -->
+      <div class="hero__image hero__image--headshot" style="top:50%; right:9%; --size:180px; --delay:4; --tilt:3deg;">
+        <div class="hero__image-inner">
+          <div class="hero__image-photo">
+            <img src="assets/images/portrait.jpg" alt="Joe Mayne" onerror="this.parentElement.classList.add('is-empty'); this.parentElement.innerHTML='<span class=&quot;media-placeholder__label&quot;>Headshot</span>';">
+          </div>
+        </div>
+      </div>
     </div>
     <div class="container">
       <span class="eyebrow">Bristol, UK · Senior Digital Marketer</span>
