@@ -220,6 +220,10 @@ section + section { border-top: 1px solid var(--line-soft); }
     radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--clay) 14%, transparent), transparent 45%);
 }
 .hero--animated .container { position: relative; z-index: 2; }
+/* Clearfix: .hero__headshot below is a float, which doesn't
+   contribute to its parent's height on its own — without this the
+   container could size itself as if the float weren't there. */
+.hero__content::after { content: ""; display: table; clear: both; }
 .hero--animated .eyebrow { display: block; }
 .hero--animated .lede { max-width: 60ch; margin: 1.2em auto 0; }
 .hero--animated .btn-row { justify-content: center; }
@@ -258,7 +262,15 @@ section + section { border-top: 1px solid var(--line-soft); }
    --delay so they don't move in unison. Swap a tile's .media-placeholder
    for a real <img> the same way as anywhere else on the site (see
    README "Adding photos") to drop real work in. */
-.hero__images { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+/* Bounded to a fixed height (not inset:0 / the section's full height)
+   because that height is unpredictable — it grows with the bio
+   paragraph's length, which now also depends on how much the
+   headshot narrows the text. Percentage offsets against a variable,
+   content-driven height would drift the tiles into wherever the
+   paragraph happened to end up; a fixed reference band keeps them
+   anchored to the actual visual cluster (name/tagline/headshot) they're
+   meant to surround, regardless of bio length. */
+.hero__images { position: absolute; top: 0; left: 0; right: 0; height: 600px; z-index: 1; pointer-events: none; }
 .hero__image {
   position: absolute;
   width: var(--size, 100px);
@@ -280,13 +292,29 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 .hero__image .media-placeholder__label { font-size: 0.68rem; }
 
-/* Headshot variant: circular instead of the work tiles' rounded
-   square, vertically centred via a negative margin rather than
-   transform — the parallax script in site.js sets .hero__image's
-   transform directly on mousemove, which would silently overwrite
-   (not combine with) a transform-based centering the instant the
-   cursor moved. */
-.hero__image--headshot { margin-top: calc(var(--size, 180px) / -2); }
+/* Headshot: unlike the work tiles (absolutely positioned, purely
+   decorative background), this one is floated inside the actual text
+   container — genuinely part of the flow, so the eyebrow/name/tagline/
+   bio text wraps around it at any width instead of ever rendering
+   behind it. Sized with clamp() so it scales with the viewport rather
+   than staying a fixed pixel size. Below 780px there's no sensible
+   width left for text to wrap around it, so it drops to a smaller,
+   centred, non-floated block above the text instead. */
+.hero__headshot {
+  position: static;
+  float: right;
+  width: clamp(160px, 22vw, 320px);
+  height: clamp(160px, 22vw, 320px);
+  margin: 0 0 28px 32px;
+}
+@media (max-width: 780px) {
+  .hero__headshot {
+    float: none;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 28px;
+  }
+}
 .hero__image-photo {
   width: 100%;
   height: 100%;
@@ -308,10 +336,12 @@ section + section { border-top: 1px solid var(--line-soft); }
   50% { transform: translateY(-16px) rotate(calc(var(--tilt, 0deg) * -1)); }
 }
 
-/* Below 780px there isn't room for floating images beside the name
-   without overlapping it, so they're hidden — the word-reveal
-   animation still runs, just without the floating cluster. */
-@media (max-width: 780px) {
+/* Both remaining tiles sit on the left, clear of the centred,
+   max-width-capped paragraph — verified by measuring actual rendered
+   positions at nine widths from 1040px to 1920px (all clean) before
+   settling on this threshold; below it, the hero's own side padding
+   shrinks enough to erode that margin. */
+@media (max-width: 1040px) {
   .hero__images { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {

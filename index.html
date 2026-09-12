@@ -42,32 +42,40 @@
        up in order across both the name and the tagline. -->
   <section class="hero hero--animated">
     <div class="hero__images" aria-hidden="true">
-      <div class="hero__image" style="top:10%; left:7%; --size:100px; --delay:0; --tilt:-6deg;">
+      <!-- Only two work tiles now, both on the left. The right side
+           belongs to the headshot (see .hero__headshot below, floated
+           in the actual text flow) — tiles positioned there collided
+           with it at some widths and with the paragraph at others,
+           since the paragraph's centred column width and the
+           headshot's own width both vary with viewport, making any
+           fixed right-side percentage unreliable. The left side stays
+           clear because the paragraph is centred with a capped
+           max-width (60ch), so there's reliable margin there
+           regardless of viewport width. -->
+      <div class="hero__image" style="top:8%; left:4%; --size:100px; --delay:0; --tilt:-6deg;">
         <div class="hero__image-inner"><div class="media-placeholder"><span class="media-placeholder__label">Your work</span></div></div>
       </div>
-      <div class="hero__image" style="top:16%; right:8%; --size:130px; --delay:1; --tilt:5deg;">
+      <div class="hero__image" style="bottom:10%; left:6%; --size:88px; --delay:2; --tilt:8deg;">
         <div class="hero__image-inner"><div class="media-placeholder"><span class="media-placeholder__label">Your work</span></div></div>
       </div>
-      <div class="hero__image" style="bottom:18%; left:13%; --size:88px; --delay:2; --tilt:8deg;">
-        <div class="hero__image-inner"><div class="media-placeholder"><span class="media-placeholder__label">Your work</span></div></div>
-      </div>
-      <div class="hero__image" style="bottom:12%; right:14%; --size:112px; --delay:3; --tilt:-4deg;">
-        <div class="hero__image-inner"><div class="media-placeholder"><span class="media-placeholder__label">Your work</span></div></div>
-      </div>
-      <!-- Headshot: same floating/tilt/parallax treatment as the work
-           tiles above, just circular and vertically centred beside the
-           text. Already wired to assets/images/portrait.jpg — upload a
-           file there (exact name) and it replaces this placeholder
-           automatically, same as the old hero's portrait slot did. -->
-      <div class="hero__image hero__image--headshot" style="top:50%; right:9%; --size:180px; --delay:4; --tilt:3deg;">
+    </div>
+    <div class="container hero__content">
+      <!-- Headshot: floated (not absolutely positioned like the
+           background work tiles above), so it's genuinely part of the
+           text flow — the text wraps around it at any width instead
+           of ever rendering behind it, and it drops to a smaller,
+           centred, non-floated block on narrow screens (see the CSS
+           "animated hero" comments). Same idle-bob/tilt/parallax
+           treatment as the work tiles. Already wired to
+           assets/images/portrait.jpg — upload a file there (exact
+           name) and it replaces this placeholder automatically. -->
+      <div class="hero__image hero__headshot" style="--delay:4; --tilt:3deg;">
         <div class="hero__image-inner">
           <div class="hero__image-photo">
             <img src="assets/images/portrait.jpg" alt="Joe Mayne" onerror="this.parentElement.classList.add('is-empty'); this.parentElement.innerHTML='<span class=&quot;media-placeholder__label&quot;>Headshot</span>';">
           </div>
         </div>
       </div>
-    </div>
-    <div class="container">
       <span class="eyebrow">Bristol, UK · Senior Digital Marketer</span>
       <h1 class="hero__name" aria-label="Joe Mayne">
         <span class="word-wrap"><span class="word" style="--wd:0;">Joe</span></span>
