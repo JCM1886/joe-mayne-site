@@ -466,14 +466,22 @@ section + section { border-top: 1px solid var(--line-soft); }
    further they scroll from centre. Track padding is roughly half a
    slide's width so the first/last slides can actually reach centre. */
 .featured-work h2 { margin-top: 0.2em; }
+.curve-carousel-wrap { position: relative; }
 .curve-carousel {
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
   padding-top: 30px;
+  cursor: grab;
+  /* Scrollable, but the scrollbar itself stays hidden — dragging,
+     touch, trackpad and the arrow buttons are still the ways to move
+     it, this just hides the track/thumb graphic. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.curve-carousel::-webkit-scrollbar { display: none; height: 0; }
+.curve-carousel.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 .curve-carousel__track {
   display: flex;
   align-items: center;
@@ -512,6 +520,30 @@ section + section { border-top: 1px solid var(--line-soft); }
   transition: background 0.15s ease;
 }
 .curve-carousel__pill:hover { background: var(--clay-deep); color: var(--sand); }
+.curve-carousel__arrow {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.curve-carousel__arrow:hover { background: var(--ink); color: var(--sand); }
+.curve-carousel__arrow--prev { left: 4px; }
+.curve-carousel__arrow--next { right: 4px; }
+@media (max-width: 640px) {
+  .curve-carousel__arrow { width: 36px; height: 36px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .curve-carousel__slide { transition: none !important; transform: none !important; }
 }

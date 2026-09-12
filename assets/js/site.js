@@ -19,25 +19,34 @@ document.addEventListener("DOMContentLoaded", function () {
   // centred slide ends up upright, largest and lowest, and the rest
   // fan away either side the further they've scrolled from centre.
   // The caption pill below tracks whichever slide is currently
-  // closest to centre.
+  // closest to centre. On top of that: auto-advances every 2s (paused
+  // on hover/focus/drag), the arrow buttons step to the prev/next
+  // slide, and the track can be click-and-dragged with a mouse — the
+  // native scrollbar is hidden in CSS since dragging/arrows/auto-play
+  // are the intended way to move through it.
   (function () {
     var track = document.getElementById("curveTrack");
     if (!track) return;
     var carousel = track.parentElement;
     var slides = Array.prototype.slice.call(track.querySelectorAll(".curve-carousel__slide"));
     var caption = document.getElementById("curveCaption");
+    var prevBtn = document.getElementById("curvePrev");
+    var nextBtn = document.getElementById("curveNext");
     var reduceMotionCurve = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var MAX_ROTATE = 16; // degrees, at the edge of the carousel
     var MAX_LIFT = 46; // px, upward shift at the edge
     var MAX_SHRINK = 0.12; // fraction smaller at the edge
+    var currentIndex = 0;
+    var autoTimer = null;
+    var isDragging = false;
 
-    function update() {
+    function applyCurve() {
       var carouselRect = carousel.getBoundingClientRect();
       var centerX = carouselRect.left + carouselRect.width / 2;
-      var closestSlide = null;
+      var closestIndex = 0;
       var closestDist = Infinity;
 
-      slides.forEach(function (slide) {
+      slides.forEach(function (slide, i) {
         var r = slide.getBoundingClientRect();
         var slideCenter = r.left + r.width / 2;
         var dist = slideCenter - centerX;
@@ -53,30 +62,123 @@ document.addEventListener("DOMContentLoaded", function () {
         var absDist = Math.abs(dist);
         if (absDist < closestDist) {
           closestDist = absDist;
-          closestSlide = slide;
+          closestIndex = i;
         }
       });
 
-      if (closestSlide && caption) {
-        var label = closestSlide.getAttribute("data-label");
-        var href = closestSlide.getAttribute("data-href");
+      currentIndex = closestIndex;
+      var slide = slides[currentIndex];
+      if (slide && caption) {
+        var label = slide.getAttribute("data-label");
+        var href = slide.getAttribute("data-href");
         if (label && caption.textContent !== label) caption.textContent = label;
         if (href) caption.setAttribute("href", href);
       }
+    }
+
+    function scrollToIndex(i) {
+      i = ((i % slides.length) + slides.length) % slides.length;
+      var slide = slides[i];
+      var target = slide.offsetLeft + slide.offsetWidth / 2 - carousel.clientWidth / 2;
+      carousel.scrollTo({ left: target, behavior: reduceMotionCurve ? "auto" : "smooth" });
     }
 
     var ticking = false;
     carousel.addEventListener("scroll", function () {
       if (!ticking) {
         window.requestAnimationFrame(function () {
-          update();
+          applyCurve();
           ticking = false;
         });
         ticking = true;
       }
     });
-    window.addEventListener("resize", update);
-    update();
+    window.addEventListener("resize", applyCurve);
+    applyCurve();
+
+    // Auto-advance every 2s. Paused whenever the pointer or keyboard
+    // focus is on the carousel, or while it's being dragged, and
+    // skipped entirely for reduced-motion.
+    function startAuto() {
+      stopAuto();
+      if (slides.length > 1 && !reduceMotionCurve) {
+        autoTimer = setInterval(function () {
+          scrollToIndex(currentIndex + 1);
+        }, 2000);
+      }
+    }
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+    startAuto();
+    carousel.addEventListener("mouseenter", stopAuto);
+    carousel.addEventListener("mouseleave", function () {
+      if (!isDragging) startAuto();
+    });
+    carousel.addEventListener("focusin", stopAuto);
+    carousel.addEventListener("focusout", function () {
+      if (!isDragging) startAuto();
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        stopAuto();
+        scrollToIndex(currentIndex - 1);
+        startAuto();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        stopAuto();
+        scrollToIndex(currentIndex + 1);
+        startAuto();
+      });
+    }
+
+    // Click-and-drag (mouse only — touch already scrolls natively).
+    // Tracks how far the pointer has moved so a drag doesn't also
+    // fire the slide's link click when the pointer is released.
+    var dragStartX = 0;
+    var dragStartScroll = 0;
+    var dragMoved = 0;
+    carousel.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse") return;
+      isDragging = true;
+      dragMoved = 0;
+      dragStartX = e.clientX;
+      dragStartScroll = carousel.scrollLeft;
+      carousel.classList.add("is-dragging");
+      stopAuto();
+      carousel.setPointerCapture(e.pointerId);
+    });
+    carousel.addEventListener("pointermove", function (e) {
+      if (!isDragging) return;
+      var dx = e.clientX - dragStartX;
+      dragMoved = Math.max(dragMoved, Math.abs(dx));
+      carousel.scrollLeft = dragStartScroll - dx;
+    });
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      carousel.classList.remove("is-dragging");
+      scrollToIndex(currentIndex);
+      startAuto();
+    }
+    carousel.addEventListener("pointerup", endDrag);
+    carousel.addEventListener("pointercancel", endDrag);
+    carousel.addEventListener(
+      "click",
+      function (e) {
+        if (dragMoved > 6) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
   })();
 
   // ---- hero floating-image parallax (home) ----
