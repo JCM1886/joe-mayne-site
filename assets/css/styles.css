@@ -458,6 +458,42 @@ section + section { border-top: 1px solid var(--line-soft); }
 .media-placeholder--wide { aspect-ratio: 16 / 9; }
 .media-placeholder--tall { aspect-ratio: 3 / 4; }
 
+/* ---------- featured work carousel ---------- */
+/* Plain horizontal scroll-snap strip — no JS, no library. Bleeds to
+   the edge of the viewport on the right so it reads as a proper
+   carousel rather than a cramped row inside the container; the first
+   slide still lines up with the container's own left edge via the
+   calc() below. */
+.featured-work h2 { margin-top: 0.2em; }
+.work-carousel { overflow-x: auto; scrollbar-width: thin; }
+.work-carousel__track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  padding: 8px calc((100vw - min(100vw, var(--max))) / 2 + 28px) 12px;
+}
+.work-carousel__slide { flex: 0 0 auto; width: min(78vw, 320px); scroll-snap-align: start; }
+.work-carousel { scroll-snap-type: x mandatory; }
+.work-carousel__slide video {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--ink);
+}
+.work-carousel__link {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--clay-deep);
+  text-decoration: none;
+}
+.work-carousel__link:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) {
+  .work-carousel { scroll-behavior: auto; }
+}
+
 .tag {
   display: inline-block;
   font-size: 0.76rem;
