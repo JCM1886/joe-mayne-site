@@ -245,12 +245,37 @@ section + section { border-top: 1px solid var(--line-soft); }
 .teaser-card p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
 
 /* ---------- cards / grids ---------- */
+/* minmax(0, 1fr) rather than a bare 1fr: a bare 1fr is really
+   minmax(auto, 1fr), so a wide child (an image, an aspect-ratio box)
+   can force its track past an even split. The 0 minimum stops that —
+   content wraps/scales within its column instead of stretching it. */
 .grid { display: grid; gap: 22px; }
-.grid--2 { grid-template-columns: repeat(2, 1fr); }
-.grid--3 { grid-template-columns: repeat(3, 1fr); }
-.grid--4 { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 900px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
+
+/* ---------- case study layout (strategy) ---------- */
+/* Text + media side by side. align-items:start stops the media box
+   being stretched to match the text column's height (the default
+   grid stretch would otherwise override its aspect-ratio). Stacks to
+   one column earlier than the general-purpose .grid--2 (900px, not
+   560px) because case-study prose needs more than half a ~1100px
+   container to stay readable — and the media block moves visually
+   above the text once stacked, via `order`, while staying second in
+   the HTML for reading/screen-reader order. */
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .case-study-grid { grid-template-columns: 1fr; }
+  .case-study-grid > :first-child { order: 2; }
+  .case-study-grid > :last-child { order: 1; }
+}
 
 .card {
   background: var(--paper);
