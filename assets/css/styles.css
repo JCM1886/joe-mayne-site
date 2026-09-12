@@ -203,6 +203,98 @@ section + section { border-top: 1px solid var(--line-soft); }
   box-shadow: var(--shadow);
 }
 
+/* ---------- animated hero (name + tagline reveal, floating work) ---------- */
+/* Recreates the mechanic from a portfolio site Joe shared as a
+   reference (word-by-word staggered reveal on the name/tagline, plus
+   a handful of portfolio images gently floating around it) — rebuilt
+   from scratch as a lighter CSS-only version, with Joe's own name,
+   tagline and (placeholder, swappable) work samples. Nothing here
+   reuses the reference site's actual code, images, or identity. */
+.hero--animated {
+  position: relative;
+  padding: 140px 0 110px;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--moss) 16%, transparent), transparent 45%),
+    radial-gradient(circle at 88% 82%, color-mix(in srgb, var(--clay) 14%, transparent), transparent 45%);
+}
+.hero--animated .container { position: relative; z-index: 2; }
+.hero--animated .eyebrow { display: block; }
+.hero--animated .lede { max-width: 60ch; margin: 1.2em auto 0; }
+.hero--animated .btn-row { justify-content: center; }
+
+.hero__name, .hero__tagline {
+  margin: 0.2em 0;
+  line-height: 1.08;
+}
+.hero__name { font-size: clamp(2.6rem, 7vw, 5rem); }
+.hero__tagline {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  color: var(--ink-soft);
+  margin-top: 0.35em;
+}
+
+/* Each word is clipped by its wrapper and slides/fades up into view.
+   --wd is the word's position in the overall reveal sequence (name
+   words first, then tagline words), so the whole headline cascades
+   in as one continuous read rather than two separate animations. */
+.word-wrap { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; }
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%);
+  animation: word-in 0.7s cubic-bezier(.22,1,.36,1) forwards;
+  animation-delay: calc(var(--wd, 0) * 0.08s);
+}
+@keyframes word-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating work-sample images, absolutely positioned around the text.
+   Each has its own gentle idle bob/tilt (hero-float), staggered via
+   --delay so they don't move in unison. Swap a tile's .media-placeholder
+   for a real <img> the same way as anywhere else on the site (see
+   README "Adding photos") to drop real work in. */
+.hero__images { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.hero__image {
+  position: absolute;
+  width: var(--size, 100px);
+  height: var(--size, 100px);
+  transition: transform 0.2s ease-out;
+}
+.hero__image-inner {
+  width: 100%;
+  height: 100%;
+  animation: hero-float 7s ease-in-out infinite;
+  animation-delay: calc(var(--delay, 0) * 0.6s);
+}
+.hero__image .media-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 8px;
+}
+.hero__image .media-placeholder__label { font-size: 0.68rem; }
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  50% { transform: translateY(-16px) rotate(calc(var(--tilt, 0deg) * -1)); }
+}
+
+/* Below 780px there isn't room for floating images beside the name
+   without overlapping it, so they're hidden — the word-reveal
+   animation still runs, just without the floating cluster. */
+@media (max-width: 780px) {
+  .hero__images { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .word { animation: none; opacity: 1; transform: none; }
+  .hero__image-inner { animation: none; }
+}
+
 .btn-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 1.8em; }
 
 .btn {

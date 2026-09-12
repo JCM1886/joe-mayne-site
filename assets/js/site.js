@@ -12,6 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ---- hero floating-image parallax (home) ----
+  // Subtle depth effect: floating work tiles drift slightly toward
+  // the cursor. Skipped entirely on touch devices (no meaningful
+  // "cursor") and for reduced-motion, so it's a pure enhancement.
+  var heroImages = document.querySelectorAll(".hero__image");
+  var reduceMotionForParallax = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isTouchDevice = window.matchMedia("(hover: none)").matches;
+  if (heroImages.length && !reduceMotionForParallax && !isTouchDevice) {
+    document.addEventListener("mousemove", function (e) {
+      var xPct = e.clientX / window.innerWidth - 0.5;
+      var yPct = e.clientY / window.innerHeight - 0.5;
+      heroImages.forEach(function (el, i) {
+        var strength = 10 + (i % 3) * 6;
+        el.style.transform = "translate(" + (xPct * strength) + "px, " + (yPct * strength) + "px)";
+      });
+    });
+  }
+
   // ---- quote carousel (home) ----
   var carousel = document.getElementById("quoteCarousel");
   if (carousel) {
