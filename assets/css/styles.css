@@ -257,24 +257,23 @@ section + section { border-top: 1px solid var(--line-soft); }
 @media (max-width: 560px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
 
 /* ---------- case study layout (strategy) ---------- */
-/* Text + media side by side. align-items:start stops the media box
-   being stretched to match the text column's height (the default
-   grid stretch would otherwise override its aspect-ratio). Stacks to
-   one column earlier than the general-purpose .grid--2 (900px, not
-   560px) because case-study prose needs more than half a ~1100px
-   container to stay readable — and the media block moves visually
-   above the text once stacked, via `order`, while staying second in
-   the HTML for reading/screen-reader order. */
-.case-study-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-  align-items: start;
+/* Media floats right so the paragraph wraps around it and continues
+   at full width once it clears the bottom — a fixed two-column grid
+   would leave a dead gap under a short media box if the text runs on
+   longer, which is the normal case here. The ::after clearfix keeps
+   the card sized to its actual content, since a float alone doesn't
+   contribute to its parent's height. Below 700px there usually isn't
+   room for text to wrap around a useful-sized image anyway, so the
+   float drops and the media block sits full-width above the text
+   (its natural position in the HTML, right after the heading/stats). */
+.case-study-body::after { content: ""; display: table; clear: both; }
+.case-study-media {
+  float: right;
+  width: 46%;
+  margin: 0 0 20px 28px;
 }
-@media (max-width: 900px) {
-  .case-study-grid { grid-template-columns: 1fr; }
-  .case-study-grid > :first-child { order: 2; }
-  .case-study-grid > :last-child { order: 1; }
+@media (max-width: 700px) {
+  .case-study-media { float: none; width: 100%; margin: 0 0 20px; }
 }
 
 .card {
