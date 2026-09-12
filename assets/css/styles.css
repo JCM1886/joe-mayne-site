@@ -549,6 +549,15 @@ section + section { border-top: 1px solid var(--line-soft); }
   transform: translateY(0);
   pointer-events: auto;
 }
+.quote-carousel__item cite {
+  display: block;
+  margin-top: 0.6em;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+}
 .quote-carousel__dots {
   display: flex;
   justify-content: center;

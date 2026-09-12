@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function next() { show((current + 1) % items.length); }
-    function start() { if (items.length > 1 && !reduceMotion) timer = setInterval(next, 6000); }
+    function start() { if (items.length > 1 && !reduceMotion) timer = setInterval(next, 3000); }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function restart() { stop(); start(); }
 
