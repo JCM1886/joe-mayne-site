@@ -146,16 +146,43 @@
     </div>
   </section>
 
+  <!-- =========================================================
+       QUALIFICATIONS — text list + overlapping certificate scroller
+       Each card links straight to the real PDF certificate (opens in
+       a new tab, browser's native PDF viewer) rather than an in-page
+       PDF embed — simplest, most robust way to "show the PDF". Drag
+       to scroll on desktop (mouse) or swipe on touch; native scroll
+       still works too. See "qualifications scroller" in site.js. -->
   <section>
-    <div class="container container--narrow">
-      <span class="eyebrow">Qualifications</span>
-      <h2>Recent learning</h2>
-      <ul>
-        <li>HubSpot AI For Marketing Course</li>
-        <li>Coursera: Learn to Code with AI</li>
-        <li>Coursera: Build AI Apps</li>
-        <li>Coursera: Foundations of UX</li>
-      </ul>
+    <div class="container">
+      <div class="grid grid--2" style="align-items:center;">
+        <div>
+          <span class="eyebrow">Qualifications</span>
+          <h2>Recent learning</h2>
+          <ul>
+            <li>Advanced Videography: Commercial Filmmaking Essentials — Skillshare/Coursera</li>
+            <li>Go Beyond the Numbers: Translate Data into Insights — Google/Coursera</li>
+            <li>Design Fundamentals with AI — Adobe/Coursera</li>
+            <li>Innovating with Google Cloud Artificial Intelligence — Google Cloud/Coursera</li>
+          </ul>
+        </div>
+        <div class="cert-scroller-wrap">
+          <div class="cert-scroller" id="certScroller">
+            <a class="cert-card" draggable="false" style="--rot:-3deg;" href="assets/documents/qualifications/advanced-videography-commercial-filmmaking.pdf" target="_blank" rel="noopener">
+              <img src="assets/images/qualifications/advanced-videography-commercial-filmmaking.jpg" alt="Advanced Videography: Commercial Filmmaking Essentials certificate — opens the PDF" draggable="false">
+            </a>
+            <a class="cert-card" draggable="false" style="--rot:2deg;" href="assets/documents/qualifications/go-beyond-the-numbers-data-insights.pdf" target="_blank" rel="noopener">
+              <img src="assets/images/qualifications/go-beyond-the-numbers-data-insights.jpg" alt="Go Beyond the Numbers: Translate Data into Insights certificate — opens the PDF" draggable="false">
+            </a>
+            <a class="cert-card" draggable="false" style="--rot:-2deg;" href="assets/documents/qualifications/design-fundamentals-with-ai.pdf" target="_blank" rel="noopener">
+              <img src="assets/images/qualifications/design-fundamentals-with-ai.jpg" alt="Design Fundamentals with AI certificate — opens the PDF" draggable="false">
+            </a>
+            <a class="cert-card" draggable="false" style="--rot:3deg;" href="assets/documents/qualifications/innovating-with-google-cloud-ai.pdf" target="_blank" rel="noopener">
+              <img src="assets/images/qualifications/innovating-with-google-cloud-ai.jpg" alt="Innovating with Google Cloud Artificial Intelligence certificate — opens the PDF" draggable="false">
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 

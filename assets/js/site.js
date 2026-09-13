@@ -243,6 +243,54 @@ document.addEventListener("DOMContentLoaded", function () {
     carousel.addEventListener("focusout", start);
   }
 
+  // ---- qualifications: overlapping certificate scroller ----
+  // Same click-vs-drag distinction as the homepage's curved carousel:
+  // a plain click opens the certificate's PDF (the card is a real
+  // link), but a drag past a small threshold scrolls the strip
+  // instead and is prevented from also firing that navigation.
+  (function () {
+    var scroller = document.getElementById("certScroller");
+    if (!scroller) return;
+
+    var dragStartX = 0;
+    var dragStartScroll = 0;
+    var dragMoved = 0;
+    var isDragging = false;
+
+    scroller.addEventListener("pointerdown", function (e) {
+      if (e.pointerType !== "mouse") return;
+      isDragging = true;
+      dragMoved = 0;
+      dragStartX = e.clientX;
+      dragStartScroll = scroller.scrollLeft;
+      scroller.classList.add("is-dragging");
+      scroller.setPointerCapture(e.pointerId);
+    });
+    scroller.addEventListener("pointermove", function (e) {
+      if (!isDragging) return;
+      var dx = e.clientX - dragStartX;
+      dragMoved = Math.max(dragMoved, Math.abs(dx));
+      scroller.scrollLeft = dragStartScroll - dx;
+    });
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      scroller.classList.remove("is-dragging");
+    }
+    scroller.addEventListener("pointerup", endDrag);
+    scroller.addEventListener("pointercancel", endDrag);
+    scroller.addEventListener(
+      "click",
+      function (e) {
+        if (dragMoved > 6) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+  })();
+
   // ---- photography lightbox (click-to-enlarge) ----
   // Each .lightbox-img is grouped with the other .lightbox-img
   // elements inside the same .grid it lives in, so prev/next cycles

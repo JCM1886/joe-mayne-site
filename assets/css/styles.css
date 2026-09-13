@@ -943,3 +943,54 @@ section + section { border-top: 1px solid var(--line-soft); }
 @media (prefers-reduced-motion: reduce) {
   .lightbox-img, .lightbox-img:hover { transition: none; transform: none; }
 }
+
+/* ---------- qualifications scroller (my process) ---------- */
+/* An overlapping stack of certificate cards next to the qualifications
+   list, each one a real link straight to its PDF (opens in a new
+   tab). Scrollable/draggable like the homepage's curved carousel —
+   same hidden-scrollbar + drag-vs-click approach, see "qualifications
+   scroller" in site.js — but without that carousel's centre-curve
+   transform, since these hold a fixed slight tilt (--rot) instead. */
+.cert-scroller-wrap { position: relative; }
+.cert-scroller {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: 36px 24px 30px 64px;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.cert-scroller::-webkit-scrollbar { display: none; height: 0; }
+.cert-scroller.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.cert-card {
+  flex: 0 0 auto;
+  display: block;
+  width: clamp(150px, 19vw, 220px);
+  aspect-ratio: 900 / 695;
+  margin-left: -56px;
+  border: 5px solid var(--paper);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  scroll-snap-align: center;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.2s ease;
+}
+.cert-card:first-child { margin-left: 0; }
+.cert-card:hover { transform: rotate(0deg) scale(1.08); position: relative; z-index: 2; }
+.cert-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Being real <a> links with an <img> inside, these are natively
+   draggable in most browsers (the "drag this link/image" gesture) -
+   that fights the custom pointer-based scroll-drag in site.js, so
+   it's switched off here in favour of that. */
+.cert-card, .cert-card img { -webkit-user-drag: none; user-select: none; }
+@media (max-width: 860px) {
+  .cert-scroller { padding-left: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cert-card { transition: none; }
+}
