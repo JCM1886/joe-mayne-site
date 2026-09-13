@@ -432,6 +432,20 @@ section + section { border-top: 1px solid var(--line-soft); }
 .card h3 { margin-bottom: 0.3em; }
 .card .meta { font-size: 0.85rem; color: var(--ink-faint); margin-bottom: 0.6em; }
 
+/* Same lively hover feedback as the homepage's Explore teaser cards
+   (border-color shift + a subtle transform on hover), used on the
+   My Process "Skills" cards - opt-in via this modifier rather than
+   every .card site-wide, since a case-study card or a photo card
+   growing on hover isn't necessarily wanted there too. */
+.card--pop {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card--pop:hover {
+  transform: scale(1.03);
+  border-color: var(--clay-deep);
+  box-shadow: var(--shadow);
+}
+
 /* image / media placeholder treatment — used wherever a real photo,
    scan, or video isn't dropped in yet. Swap the whole element for a
    real <img>/<video>/iframe when the asset exists. */
@@ -558,6 +572,16 @@ section + section { border-top: 1px solid var(--line-soft); }
   border-radius: 999px;
   padding: 4px 10px;
   margin: 0 6px 6px 0;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+/* Complementary colour change on hover: moss (green) swaps to clay
+   (the site's other accent, rust/orange) rather than just deepening
+   the same colour, alongside the same grow-on-hover feedback as the
+   Skills cards. */
+.tag:hover {
+  transform: scale(1.08);
+  background: var(--clay);
+  color: var(--paper);
 }
 
 /* ---------- timeline (my process) ---------- */
@@ -860,4 +884,62 @@ section + section { border-top: 1px solid var(--line-soft); }
   border-radius: 999px;
   padding: 4px 12px;
   margin-bottom: 0.8em;
+}
+
+/* ---------- photography lightbox ---------- */
+/* Click-to-enlarge for real photo grids (Corporate, Travel). The
+   thumbnail itself just gets a hover cue (slight lift + zoom
+   cursor); the actual full-size view is the overlay below, opened
+   and driven by "photography lightbox" in site.js. */
+.lightbox-img { cursor: zoom-in; transition: transform 0.15s ease; }
+.lightbox-img:hover { transform: scale(1.02); }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--ink) 92%, black);
+  padding: 32px;
+}
+.lightbox[hidden] { display: none; }
+.lightbox__image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  object-fit: contain;
+}
+.lightbox__close,
+.lightbox__nav {
+  position: fixed;
+  z-index: 201;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.lightbox__close:hover,
+.lightbox__nav:hover { background: rgba(255, 255, 255, 0.22); }
+.lightbox__close { top: 24px; right: 24px; }
+.lightbox__nav--prev { left: 24px; top: 50%; transform: translateY(-50%); }
+.lightbox__nav--next { right: 24px; top: 50%; transform: translateY(-50%); }
+@media (max-width: 640px) {
+  .lightbox { padding: 16px; }
+  .lightbox__close, .lightbox__nav { width: 40px; height: 40px; }
+  .lightbox__close { top: 12px; right: 12px; }
+  .lightbox__nav--prev { left: 8px; }
+  .lightbox__nav--next { right: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-img, .lightbox-img:hover { transition: none; transform: none; }
 }

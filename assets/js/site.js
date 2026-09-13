@@ -243,6 +243,77 @@ document.addEventListener("DOMContentLoaded", function () {
     carousel.addEventListener("focusout", start);
   }
 
+  // ---- photography lightbox (click-to-enlarge) ----
+  // Each .lightbox-img is grouped with the other .lightbox-img
+  // elements inside the same .grid it lives in, so prev/next cycles
+  // within that photo category only (e.g. Corporate photos never
+  // spill into Travel). Closes on the close button, Escape, or a
+  // click on the dark backdrop itself (not the image).
+  (function () {
+    var lightbox = document.getElementById("lightbox");
+    if (!lightbox) return;
+    var lightboxImage = document.getElementById("lightboxImage");
+    var closeBtn = lightbox.querySelector(".lightbox__close");
+    var prevBtn = lightbox.querySelector(".lightbox__nav--prev");
+    var nextBtn = lightbox.querySelector(".lightbox__nav--next");
+
+    var currentGroup = [];
+    var currentIndex = 0;
+
+    function groupFor(img) {
+      var grid = img.closest(".grid");
+      var scope = grid || document;
+      return Array.prototype.slice.call(scope.querySelectorAll(".lightbox-img"));
+    }
+
+    function show(index) {
+      currentIndex = ((index % currentGroup.length) + currentGroup.length) % currentGroup.length;
+      var img = currentGroup[currentIndex];
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt || "";
+      var multiple = currentGroup.length > 1;
+      prevBtn.hidden = !multiple;
+      nextBtn.hidden = !multiple;
+    }
+
+    function open(img) {
+      currentGroup = groupFor(img);
+      show(currentGroup.indexOf(img));
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function close() {
+      lightbox.hidden = true;
+      lightboxImage.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".lightbox-img").forEach(function (img) {
+      img.addEventListener("click", function () {
+        open(img);
+      });
+    });
+
+    closeBtn.addEventListener("click", close);
+    prevBtn.addEventListener("click", function () {
+      show(currentIndex - 1);
+    });
+    nextBtn.addEventListener("click", function () {
+      show(currentIndex + 1);
+    });
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (lightbox.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") show(currentIndex - 1);
+      else if (e.key === "ArrowRight") show(currentIndex + 1);
+    });
+  })();
+
   // ---- photography index: scroll-velocity image drift ----
   // Each .photo-index__float image's base position/rotation is fixed
   // via inline --base-x/--rotation custom properties in the HTML;

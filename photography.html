@@ -97,11 +97,11 @@
       <span class="eyebrow">Corporate</span>
       <h2>Corporate photography</h2>
       <div class="grid grid--4">
-        <img src="assets/images/photography/corporate/corporate-headshot-1.jpg" alt="Corporate headshot of a woman smiling outdoors" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/corporate/corporate-headshot-2.jpg" alt="Corporate headshot of a woman smiling in a park" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/corporate/corporate-workshop-ecoact.jpg" alt="Two colleagues sharing a laugh during a workshop session" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/corporate/corporate-conference-atos.jpg" alt="A colleague speaking animatedly at a conference event" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/corporate/corporate-workshop-team.jpg" alt="A team laughing together around a table during a workshop" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/corporate/corporate-headshot-1.jpg" alt="Corporate headshot of a woman smiling outdoors" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/corporate/corporate-headshot-2.jpg" alt="Corporate headshot of a woman smiling in a park" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/corporate/corporate-workshop-ecoact.jpg" alt="Two colleagues sharing a laugh during a workshop session" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/corporate/corporate-conference-atos.jpg" alt="A colleague speaking animatedly at a conference event" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/corporate/corporate-workshop-team.jpg" alt="A team laughing together around a table during a workshop" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
       </div>
     </div>
   </section>
@@ -111,12 +111,12 @@
       <span class="eyebrow">Travel</span>
       <h2>Travel photography</h2>
       <div class="grid grid--3">
-        <img src="assets/images/photography/travel/travel-bali-macaque.jpg" alt="A macaque sitting in a tree" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/travel/travel-becak-street.jpg" alt="A cycle-rickshaw driver on a street, long exposure" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/travel/travel-vietnam-market-stall.jpg" alt="A market stall seller surrounded by plush toys" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="A cyclist with an umbrella at night, long exposure" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="A surfer walking along a beach with a surfboard" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
-        <img src="assets/images/photography/travel/travel-river-tree-root.jpg" alt="A tree root over a fast-flowing blue river" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/travel/travel-bali-macaque.jpg" alt="A macaque sitting in a tree" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/travel/travel-becak-street.jpg" alt="A cycle-rickshaw driver on a street, long exposure" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/travel/travel-vietnam-market-stall.jpg" alt="A market stall seller surrounded by plush toys" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="A cyclist with an umbrella at night, long exposure" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="A surfer walking along a beach with a surfboard" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
+        <img class="lightbox-img" src="assets/images/photography/travel/travel-river-tree-root.jpg" alt="A tree root over a fast-flowing blue river" style="border-radius:var(--radius); aspect-ratio:4/3; object-fit:cover; width:100%;">
       </div>
     </div>
   </section>
@@ -132,6 +132,22 @@
     </nav>
   </div>
 </footer>
+
+<!-- Click-to-enlarge lightbox for the real photos above (Corporate,
+     Travel). Prev/next cycles only within whichever grid the photo
+     was clicked from — see "photography lightbox" in site.js. -->
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lightbox__close" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </button>
+  <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <img class="lightbox__image" id="lightboxImage" src="" alt="">
+  <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
 
 <script src="assets/js/site.js"></script>
 </body>
