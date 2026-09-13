@@ -991,6 +991,32 @@ section + section { border-top: 1px solid var(--line-soft); }
 @media (max-width: 860px) {
   .cert-scroller { padding-left: 24px; }
 }
+/* Feathers the strip's edges to the page background (--sand) rather
+   than an abrupt hard cut, hinting the gallery continues past what's
+   currently visible. Sits above the cards but never blocks the drag
+   underneath (pointer-events:none). */
+.cert-scroller__fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 56px;
+  z-index: 3;
+  pointer-events: none;
+}
+.cert-scroller__fade--left {
+  left: 0;
+  background: linear-gradient(to right, var(--sand), transparent);
+}
+.cert-scroller__fade--right {
+  right: 0;
+  background: linear-gradient(to left, var(--sand), transparent);
+}
+@media (max-width: 860px) {
+  /* Matches .cert-scroller's own 24px padding-left at this width, so
+     the fade sits entirely in that gutter rather than clipping onto
+     the first visible card. */
+  .cert-scroller__fade { width: 24px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .cert-card { transition: none; }
 }
