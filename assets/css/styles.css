@@ -533,6 +533,13 @@ section + section { border-top: 1px solid var(--line-soft); }
   box-shadow: var(--shadow);
   display: block;
   background: var(--ink);
+  /* The slide images are the biggest hit target in the carousel, so
+     without this the browser's native "drag this image" gesture
+     grabs the pointer first and the custom scroll-drag in site.js
+     never starts — dragging only worked in the gaps between slides.
+     Same fix as the qualifications cert-scroller below. */
+  -webkit-user-drag: none;
+  user-select: none;
 }
 /* Opt out of the rounded-card treatment for an image meant to float
    free against the page background (e.g. a transparent-background
