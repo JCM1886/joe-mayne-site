@@ -370,6 +370,13 @@ section + section { border-top: 1px solid var(--line-soft); }
 .btn--ghost { background: transparent; border-color: var(--line); color: var(--ink); }
 .btn--ghost:hover { border-color: var(--clay-deep); color: var(--clay-deep); }
 
+/* The site's second accent (moss — the same colour the Tools tags are
+   built around) as a solid, high-contrast CTA. --moss/--paper checks
+   out to ~5.1:1 in light mode and ~6.3:1 in dark mode, comfortably
+   clearing WCAG AA (4.5:1) for normal-size text. */
+.btn--accent { background: var(--moss); border-color: var(--moss); color: var(--paper); }
+.btn--accent:hover { background: var(--moss-deep); border-color: var(--moss-deep); color: var(--paper); }
+
 /* ---------- teaser grid (home) ---------- */
 .teasers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
 @media (max-width: 980px) { .teasers { grid-template-columns: repeat(2, 1fr); } }
@@ -501,23 +508,43 @@ section + section { border-top: 1px solid var(--line-soft); }
   align-items: center;
   gap: 32px;
   width: max-content;
-  padding: 20px calc(50% - min(35vw, 210px)) 50px;
+  /* Roughly half the widest slide can now reach (a landscape slide
+     at the max 46vw/300px height, ~1.8:1 ratio, is ~540px wide), so
+     the first/last slide can still actually reach centre. */
+  padding: 20px calc(50% - min(38vw, 270px)) 50px;
 }
+/* Height-driven rather than width-driven, so each slide can be "any
+   shape": a real <img>/<video> supplies its own intrinsic aspect
+   ratio via width:auto against a fixed height, so a landscape shot
+   renders wider and a portrait one narrower, rather than every slide
+   being forced into the same box. */
 .curve-carousel__slide {
   flex: 0 0 auto;
-  width: min(70vw, 420px);
+  height: min(46vw, 300px);
   scroll-snap-align: center;
   will-change: transform;
 }
-.curve-carousel__slide .media-placeholder { border-radius: var(--radius); box-shadow: var(--shadow); }
-.curve-carousel__slide .media-placeholder--tall { aspect-ratio: 4 / 5; }
+.curve-carousel__slide img,
 .curve-carousel__slide video {
-  width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
+  width: auto;
   object-fit: cover;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  display: block;
   background: var(--ink);
+}
+/* Opt out of the rounded-card treatment for an image meant to float
+   free against the page background (e.g. a transparent-background
+   PNG) — a rectangular shadow/radius around it would show up in its
+   own transparent padding and look like a phantom card. */
+.curve-carousel__slide--plain img { border-radius: 0; box-shadow: none; background: none; }
+.curve-carousel__slide .media-placeholder {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 .curve-carousel__caption { text-align: center; margin-top: -12px; }
 .curve-carousel__pill {
