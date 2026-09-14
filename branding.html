@@ -58,44 +58,138 @@
           </video>
         </div>
         <div>
-          <p>As lead marketer for our Climate Data Analytics (CDA) tools, I worked cross-functionally with developers, sales and advisory teams to shape the product roadmap and go-to-market strategy. I unified a fragmented toolset into a single, coherent suite, renaming each tool to reflect its actual purpose and to enhance its performance in SERPs. I designed a shared iconographic system to visually unite them, laying the groundwork for full platform integration. However, this work was paused when Schneider Electric acquired SE Advisory Services, pending a combined software strategy.</p>
+          <p>As lead marketer for our Climate Data Analytics (CDA) tools, I worked cross-functionally with developers, sales and advisory teams to shape the product roadmap and go-to-market strategy.</p>
         </div>
       </div>
 
-      <div class="grid grid--3" style="margin-bottom:12px;">
+      <!-- Same 50/50 layout as the block above (image left, text
+           right) rather than alternating, per Joe's request — reads
+           as a continuation of the same story, not a new visual
+           rhythm. -->
+      <div class="grid grid--2" style="align-items:center; margin-bottom:36px;">
+        <div class="media-placeholder--wide" style="background:none; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--line);">
+          <img src="assets/images/tools/cda-menu.jpg" alt="The Climate Data Analytics tools menu — Free frameworks assessor, Decarbonisation Tool, Carbon and Energy Pricing Tool, Supplier Engagement Tool and Climate Risk Tool, each with a shared icon style" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div>
+          <p>I planned to unify a fragmented toolset into a single, coherent suite, renaming each tool to reflect its actual purpose and to enhance its performance in SERPs. I designed a shared iconographic system to visually unite them, laying the groundwork for full platform integration. However, this work was paused when Schneider Electric acquired SE Advisory Services, pending a combined software strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <a class="card card--pop" href="tool-carbon-pricing.html" style="text-decoration:none; color:inherit; display:block;">
-          <div class="media-placeholder"><span class="media-placeholder__label">Carbon Pricing Tool<br>cover image</span></div>
-          <div class="card__body">
-            <h3>Carbon and Energy Pricing Tool</h3>
-            <p>Models a business's exposure to regulatory and internal carbon pricing, scenario by scenario, through to 2050.</p>
-          </div>
-        </a>
+  <!-- =========================================================
+       DIGITAL TOOL GALLERIES
+       One curve-carousel-block per tool — same component as the
+       homepage's Featured Work, reused via the class-scoped JS (see
+       "curved scroll carousel" in site.js). The individual tool case
+       -study pages (tool-carbon-pricing.html, tool-eclr.html,
+       tool-craft.html) are hidden from navigation for now rather
+       than deleted, per Joe's request — the galleries below replace
+       them as the way to browse each tool. Only ECLR currently has
+       real screenshots (the 3 screen recordings); SEED has the one
+       brochure mockup; CRaFT and Carbon Pricing are still a single
+       placeholder slide each pending real assets.
+       ========================================================= -->
+  <section class="tight">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">Digital Tools</span>
+      <h2>See the tools</h2>
+    </div>
 
-        <a class="card card--pop" href="tool-eclr.html" style="text-decoration:none; color:inherit; display:block;">
-          <div class="media-placeholder"><span class="media-placeholder__label">ECLR<br>cover image</span></div>
-          <div class="card__body">
-            <h3>Climate Risk Tool (ECLR)</h3>
-            <p>Analyses how vulnerable an organisation's physical sites are to climate hazards, and prioritises adaptation measures.</p>
-          </div>
-        </a>
-
-        <a class="card card--pop" href="tool-craft.html" style="text-decoration:none; color:inherit; display:block;">
-          <div class="media-placeholder"><span class="media-placeholder__label">CRaFT<br>cover image</span></div>
-          <div class="card__body">
-            <h3>Carbon Reduction and Feasibility Tool (CRaFT)</h3>
-            <p>Forecasts, sets and tracks science-based emissions targets from target-setting through to net-zero.</p>
-          </div>
-        </a>
-
-        <div class="card">
-          <div class="media-placeholder"><span class="media-placeholder__label">SEED<br>cover image</span></div>
-          <div class="card__body">
-            <h3>SEED</h3>
-            <p>We recognised that one of our unique selling points or elements that separated our tools and platforms from the rest was the connection to the advisory services and the experts that built the tools based on years of experience, so we ensured our team were kept visible in our content and communications. We also know from experience that our content with smiling faces in performs best, because people respond to people. It's just basic psychology!</p>
+    <div class="container" style="margin-bottom:6px;">
+      <h3>SEED</h3>
+      <p style="max-width:66ch;">We recognised that one of our unique selling points or elements that separated our tools and platforms from the rest was the connection to the advisory services and the experts that built the tools based on years of experience, so we ensured our team were kept visible in our content and communications. We also know from experience that our content with smiling faces in performs best, because people respond to people. It's just basic psychology!</p>
+    </div>
+    <div class="curve-carousel-block" style="margin-bottom:48px;">
+      <div class="curve-carousel-wrap">
+        <div class="curve-carousel">
+          <div class="curve-carousel__track">
+            <div class="curve-carousel__slide" data-label="SEED brochure design">
+              <img src="assets/images/featured-work/seed-brochure-mockup.jpg" alt="Mockup of the SEED (Supplier Emissions Engagement and Decarbonisation) brochure, cover and laptop screen against a teal background" draggable="false">
+            </div>
           </div>
         </div>
+      </div>
+      <div class="curve-carousel__caption">
+        <span class="curve-carousel__pill">SEED brochure design</span>
+      </div>
+    </div>
 
+    <div class="container" style="margin-bottom:6px;">
+      <h3>Climate Risk Tool (ECLR)</h3>
+      <p style="max-width:66ch;">Analyses how vulnerable an organisation's physical sites are to climate hazards, and prioritises adaptation measures. Three of the platform's report tabs, screen-recorded live.</p>
+    </div>
+    <div class="curve-carousel-block" style="margin-bottom:48px;">
+      <div class="curve-carousel-wrap">
+        <button type="button" class="curve-carousel__arrow curve-carousel__arrow--prev" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="curve-carousel">
+          <div class="curve-carousel__track">
+            <div class="curve-carousel__slide" data-label="Climate Hazards">
+              <video autoplay loop muted playsinline poster="assets/images/tools/eclr/poster-climate-hazards.jpg" aria-label="ECLR — Climate Hazards tab, screen recording">
+                <source src="assets/video/eclr/eclr-climate-hazards-short.mp4" type="video/mp4">
+                <source src="assets/video/eclr/eclr-climate-hazards-short.webm" type="video/webm">
+              </video>
+            </div>
+            <div class="curve-carousel__slide" data-label="Climate Indicators">
+              <video autoplay loop muted playsinline poster="assets/images/tools/eclr/poster-climate-indicators.jpg" aria-label="ECLR — Climate Indicators tab, screen recording">
+                <source src="assets/video/eclr/eclr-climate-indicators.mp4" type="video/mp4">
+                <source src="assets/video/eclr/eclr-climate-indicators.webm" type="video/webm">
+              </video>
+            </div>
+            <div class="curve-carousel__slide" data-label="Site Report">
+              <video autoplay loop muted playsinline poster="assets/images/tools/eclr/poster-site-report.jpg" aria-label="ECLR — Site Report tab, screen recording">
+                <source src="assets/video/eclr/eclr-site-report.mp4" type="video/mp4">
+                <source src="assets/video/eclr/eclr-site-report.webm" type="video/webm">
+              </video>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="curve-carousel__arrow curve-carousel__arrow--next" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="curve-carousel__caption">
+        <span class="curve-carousel__pill">Climate Hazards</span>
+      </div>
+    </div>
+
+    <div class="container" style="margin-bottom:6px;">
+      <h3>Carbon Reduction and Feasibility Tool (CRaFT)</h3>
+      <p style="max-width:66ch;">Forecasts, sets and tracks science-based emissions targets from target-setting through to net-zero.</p>
+    </div>
+    <div class="curve-carousel-block" style="margin-bottom:48px;">
+      <div class="curve-carousel-wrap">
+        <div class="curve-carousel">
+          <div class="curve-carousel__track">
+            <div class="curve-carousel__slide" data-label="CRaFT — screenshots coming soon">
+              <div class="media-placeholder"><span class="media-placeholder__label">CRaFT<br>screenshots coming soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="curve-carousel__caption">
+        <span class="curve-carousel__pill">CRaFT — screenshots coming soon</span>
+      </div>
+    </div>
+
+    <div class="container" style="margin-bottom:6px;">
+      <h3>Carbon and Energy Pricing Tool</h3>
+      <p style="max-width:66ch;">Models a business's exposure to regulatory and internal carbon pricing, scenario by scenario, through to 2050.</p>
+    </div>
+    <div class="curve-carousel-block">
+      <div class="curve-carousel-wrap">
+        <div class="curve-carousel">
+          <div class="curve-carousel__track">
+            <div class="curve-carousel__slide" data-label="Carbon Pricing Tool — screenshots coming soon">
+              <div class="media-placeholder"><span class="media-placeholder__label">Carbon Pricing Tool<br>screenshots coming soon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="curve-carousel__caption">
+        <span class="curve-carousel__pill">Carbon Pricing Tool — screenshots coming soon</span>
       </div>
     </div>
   </section>

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ---- featured work: curved scroll carousel (home) ----
+  // ---- curved scroll carousel (featured work, digital tool galleries) ----
   // On every scroll frame, work out each slide's horizontal distance
   // from the carousel's own centre, normalise it to -1..1, and turn
   // that into a rotate + upward lift + slight scale-down — the
@@ -39,14 +39,20 @@ document.addEventListener("DOMContentLoaded", function () {
   // slide, and the track can be click-and-dragged with a mouse — the
   // native scrollbar is hidden in CSS since dragging/arrows/auto-play
   // are the intended way to move through it.
-  (function () {
-    var track = document.getElementById("curveTrack");
+  //
+  // Reusable across any number of instances on a page: each
+  // .curve-carousel-block is wired up independently, with its own
+  // arrows/track/caption found by class rather than a page-unique id
+  // — so the exact same markup can repeat (home's Featured Work, and
+  // Branding's per-tool galleries) without id collisions.
+  Array.prototype.slice.call(document.querySelectorAll(".curve-carousel-block")).forEach(function (block) {
+    var track = block.querySelector(".curve-carousel__track");
     if (!track) return;
     var carousel = track.parentElement;
     var slides = Array.prototype.slice.call(track.querySelectorAll(".curve-carousel__slide"));
-    var caption = document.getElementById("curveCaption");
-    var prevBtn = document.getElementById("curvePrev");
-    var nextBtn = document.getElementById("curveNext");
+    var caption = block.querySelector(".curve-carousel__pill");
+    var prevBtn = block.querySelector(".curve-carousel__arrow--prev");
+    var nextBtn = block.querySelector(".curve-carousel__arrow--next");
     var reduceMotionCurve = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var MAX_ROTATE = 16; // degrees, at the edge of the carousel
     var MAX_LIFT = 46; // px, upward shift at the edge
@@ -194,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       true
     );
-  })();
+  });
 
   // ---- hero floating-image parallax (home) ----
   // Subtle depth effect: floating work tiles drift slightly toward
