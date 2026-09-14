@@ -425,8 +425,17 @@ section + section { border-top: 1px solid var(--line-soft); }
   width: 46%;
   margin: 0 0 20px 28px;
 }
+/* Opposite float, for alternating text/media rhythm down a page (the
+   original eco-act.com tool pages did this — media right, then left,
+   then right again) rather than every block floating the same way. */
+.case-study-media--left {
+  float: left;
+  width: 46%;
+  margin: 0 28px 20px 0;
+}
 @media (max-width: 700px) {
-  .case-study-media { float: none; width: 100%; margin: 0 0 20px; }
+  .case-study-media,
+  .case-study-media--left { float: none; width: 100%; margin: 0 0 20px; }
 }
 
 .card {

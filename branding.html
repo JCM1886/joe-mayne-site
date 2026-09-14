@@ -42,17 +42,25 @@
   <section class="tight">
     <div class="container">
       <h2>Digital tools</h2>
-      <p style="max-width:62ch;">Content, structure and go-to-market messaging for the interactive climate tools built during my time at EcoAct / SE Advisory Services — Carbon Pricing, ECLR and CRaFT each link through to a full page; SEED was the internal content approach that ran across all of them.</p>
 
-      <!-- Autoplaying, silent, looping — a quick visual demo sitting
-           alongside the tool cards rather than a click-to-play embed,
-           since it's meant to catch the eye as you scroll past rather
-           than be watched with sound. muted+playsinline is required
-           for autoplay to actually be allowed by the browser. -->
-      <video class="media-placeholder--wide" style="width:100%; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--line); margin-bottom:28px; display:block;" autoplay loop muted playsinline aria-label="Screen recording of Climate Data Analytics dashboard improvements">
-        <source src="assets/video/tools/cda-screenshot-improvements.mp4" type="video/mp4">
-        <source src="assets/video/tools/cda-screenshot-improvements.webm" type="video/webm">
-      </video>
+      <!-- Same 50/50 media+text layout as the homepage's About
+           section (.grid.grid--2, align-items:center) rather than a
+           full-width video above a lead paragraph, per Joe's request
+           to match that layout. Autoplaying, silent, looping — it's
+           meant to catch the eye while scrolling past rather than be
+           watched with sound. muted+playsinline is required for
+           autoplay to actually be allowed by the browser. -->
+      <div class="grid grid--2" style="align-items:center; margin-bottom:36px;">
+        <div class="media-placeholder--wide" style="background:none; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--line);">
+          <video style="width:100%; height:100%; object-fit:cover; display:block;" autoplay loop muted playsinline aria-label="Screen recording of Climate Data Analytics dashboard improvements">
+            <source src="assets/video/tools/cda-screenshot-improvements.mp4" type="video/mp4">
+            <source src="assets/video/tools/cda-screenshot-improvements.webm" type="video/webm">
+          </video>
+        </div>
+        <div>
+          <p>As lead marketer for our Climate Data Analytics (CDA) tools, I worked cross-functionally with developers, sales and advisory teams to shape the product roadmap and go-to-market strategy. I unified a fragmented toolset into a single, coherent suite, renaming each tool to reflect its actual purpose and to enhance its performance in SERPs. I designed a shared iconographic system to visually unite them, laying the groundwork for full platform integration. However, this work was paused when Schneider Electric acquired SE Advisory Services, pending a combined software strategy.</p>
+        </div>
+      </div>
 
       <div class="grid grid--3" style="margin-bottom:12px;">
 

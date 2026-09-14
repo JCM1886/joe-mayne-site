@@ -2,6 +2,21 @@
 // dependencies. Safe to open in any browser as-is.
 
 document.addEventListener("DOMContentLoaded", function () {
+  // ---- belt-and-braces autoplay for background/demo <video>s ----
+  // The native autoplay attribute is meant to self-trigger, but with
+  // several muted autoplay videos on one page (or a <video> with
+  // multiple <source> children still negotiating format when the
+  // browser's initial autoplay pass runs) it can silently no-op in
+  // some browsers/versions. Calling .play() explicitly once things
+  // are loaded is a harmless no-op where autoplay already worked, and
+  // a real fix where it didn't. The catch swallows the rare case a
+  // browser's autoplay policy still refuses it — nothing to do then.
+  document.querySelectorAll("video[autoplay]").forEach(function (v) {
+    var tryPlay = function () { v.play().catch(function () {}); };
+    if (v.readyState >= 2) tryPlay();
+    else v.addEventListener("loadeddata", tryPlay, { once: true });
+  });
+
   // ---- mobile nav toggle ----
   var toggle = document.querySelector(".nav__toggle");
   var links = document.querySelector(".nav__links");
