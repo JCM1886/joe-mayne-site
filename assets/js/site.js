@@ -534,10 +534,25 @@ document.addEventListener("DOMContentLoaded", function () {
         frame.allowFullscreen = true;
       } else if (localSrc) {
         frame = document.createElement("video");
-        frame.src = localSrc;
         frame.controls = true;
         frame.autoplay = true;
         frame.playsInline = true;
+        // MP4/H.264 first (the compatible default — every major
+        // browser, including Safari/iOS, plays it), WebM/VP9 second
+        // as a smaller fallback source for browsers that prefer it.
+        // Using <source> children rather than frame.src lets the
+        // browser pick whichever it actually supports.
+        var mp4Source = document.createElement("source");
+        mp4Source.src = localSrc;
+        mp4Source.type = "video/mp4";
+        frame.appendChild(mp4Source);
+        var webmSrc = el.getAttribute("data-src-webm");
+        if (webmSrc) {
+          var webmSource = document.createElement("source");
+          webmSource.src = webmSrc;
+          webmSource.type = "video/webm";
+          frame.appendChild(webmSource);
+        }
       }
       if (frame) {
         thumb.remove();
