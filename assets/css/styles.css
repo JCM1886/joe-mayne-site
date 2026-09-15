@@ -793,6 +793,27 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 .quote-carousel__dots button.is-active { background: var(--clay-deep); }
 
+/* Distinct "closing band" treatment for the quote-carousel section
+   repeated at the bottom of every page — a solid moss-deep fill (the
+   site's accent colour, same family as .btn--accent) rather than the
+   default sand/paper background, so it reads as one deliberate,
+   recognisable section wherever it appears rather than blending into
+   whatever content happened to precede it. Contrast verified: paper
+   text on moss-deep clears WCAG AA (>4.5:1) for normal text. */
+.quote-band {
+  background: linear-gradient(160deg, var(--moss-deep), var(--moss));
+  border-top: none;
+}
+.quote-band .eyebrow { color: var(--paper); opacity: 0.85; }
+.quote-band .quote-carousel__item { color: var(--paper); }
+.quote-band .quote-carousel__item cite { color: color-mix(in srgb, var(--paper) 78%, transparent); }
+.quote-band .quote-carousel__dots button { background: color-mix(in srgb, var(--paper) 35%, transparent); }
+.quote-band .quote-carousel__dots button.is-active { background: var(--paper); }
+.quote-band .btn--primary { background: var(--paper); color: var(--moss-deep); }
+.quote-band .btn--primary:hover { background: var(--sand); color: var(--moss-deep); }
+.quote-band .btn--ghost { border-color: color-mix(in srgb, var(--paper) 55%, transparent); color: var(--paper); }
+.quote-band .btn--ghost:hover { border-color: var(--paper); color: var(--paper); background: color-mix(in srgb, var(--paper) 12%, transparent); }
+
 /* ---------- forms ---------- */
 .field { margin-bottom: 18px; }
 .field label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }

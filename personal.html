@@ -123,6 +123,31 @@
     </div>
   </section>
 
+  <!-- =========================================================
+       QUOTE BAND — repeated at the bottom of every page, right
+       before the footer, in the same distinct moss-deep treatment
+       each time (see .quote-band in styles.css) so it reads as one
+       consistent, recognisable closing section site-wide. Same
+       markup/ids as index.html's copy — see "quote carousel" in
+       site.js for the logic (id-scoped, fine since each page only
+       ever has this one instance).
+       ========================================================= -->
+  <section class="tight quote-band">
+    <div class="container container--narrow" style="text-align:center;">
+      <span class="eyebrow">What people say</span>
+      <div class="quote-carousel" id="quoteCarousel">
+        <blockquote class="quote-carousel__item is-active">I'm currently exploring new opportunities in marketing leadership, particularly with sustainability and purpose-driven organisations.</blockquote>
+        <blockquote class="quote-carousel__item">I worked closely with Joe for more than two years on major digital and marketing transformation projects. He is a strategic leader who excels at connecting business goals, customer experience, and technology to deliver meaningful results. Joe has a unique ability to align stakeholders, simplify complex challenges, and drive execution across cross-functional teams. His expertise in digital strategy, marketing technology, analytics, and customer experience, combined with his collaborative leadership style, makes him an exceptional partner for any organization navigating digital change.<cite>— Courtney O'Daniel</cite></blockquote>
+        <blockquote class="quote-carousel__item">Joe is a rare find, both creatively gifted and analytical. While some marketers are happy to repeat the same playbook, Joe looks at the data and finds opportunities to truly improve performance. He is curious and will not settle for mediocre results. He is also digitally savvy and able to move quickly at the pace required in the AI era.<cite>— Sarah Gregg</cite></blockquote>
+      </div>
+      <div class="quote-carousel__dots" id="quoteDots" aria-hidden="true"></div>
+      <div class="btn-row" style="justify-content:center;">
+        <a class="btn btn--primary" href="strategy.html">View my work</a>
+        <a class="btn btn--ghost" href="contact.html">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="site-footer">
