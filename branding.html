@@ -59,7 +59,12 @@
     <div class="container">
       <span class="eyebrow">Digital Tools</span>
       <h2>Digital Tools</h2>
-      <div class="grid grid--2" style="row-gap:56px; column-gap:36px;">
+      <!-- align-items:start rather than the grid default (stretch) —
+           stretch was forcing every cell in a row to the height of
+           its tallest neighbour, leaving a large blank gap under
+           whichever cell's own content (video/carousel + text)
+           happened to be shorter. -->
+      <div class="grid grid--2" style="row-gap:56px; column-gap:36px; align-items:start;">
 
         <div>
           <h3>Climate Data Analytics</h3>
@@ -90,16 +95,17 @@
 
         <div>
           <h3>Product Showcase</h3>
-          <!-- Click-to-play, not autoplay/muted like the other tool
-               clips — this one has a French voiceover, and muting it
-               would defeat the point. Reuses the .video-embed
-               component (see "click-to-load video embeds" in
-               site.js) with both a poster frame and dual mp4/webm
-               sources. -->
-          <div class="video-embed" style="margin-bottom:14px;" data-src="assets/video/eclr/eclr-laptop-mockup.mp4" data-src-webm="assets/video/eclr/eclr-laptop-mockup.webm" data-title="ECLR product showcase">
-            <div class="video-embed__thumb" style="background-image:url('assets/images/tools/eclr/poster-eclr-laptop-mockup.jpg');">
-              <span class="video-embed__play" aria-hidden="true"></span>
-            </div>
+          <!-- Live YouTube embed, autoplaying and looping from load
+               rather than the earlier click-to-play local file — per
+               Joe's request. autoplay=1 only actually plays in a
+               browser when the embed is also muted (YouTube's own
+               autoplay policy, same reasoning as the local
+               autoplay/muted clips elsewhere on this page); loop=1
+               needs playlist=<same video ID> or YouTube won't loop a
+               single video. Viewers can unmute via the player's own
+               controls if they want the sound. -->
+          <div class="video-embed" style="margin-bottom:14px;">
+            <iframe src="https://www.youtube-nocookie.com/embed/7rget6wf3fk?autoplay=1&mute=1&loop=1&playlist=7rget6wf3fk&rel=0&modestbranding=1&playsinline=1" title="ECLR product showcase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
           <p>Rather than a static screenshot or a raw screen recording, I chose a fast, visually driven reveal to move through the platform's capabilities in seconds. It's a format built to stop a scroll, hold attention, and get a viewer through the whole feature set before their patience runs out — the one I reach for whenever a tool has more to show than a single image can carry, but not enough time to earn a full guided walkthrough.</p>
         </div>
