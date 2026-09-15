@@ -407,7 +407,11 @@ section + section { border-top: 1px solid var(--line-soft); }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 900px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
+/* Same minmax(0, 1fr) reasoning as above applies to the single mobile
+   column too — a bare 1fr here let a wide child (first hit by the
+   Digital Tools 2x2 grid's video/image cells) blow the track past the
+   viewport width instead of shrinking into it. */
+@media (max-width: 560px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---------- case study layout (strategy) ---------- */
 /* Media floats right so the paragraph wraps around it and continues
