@@ -20,6 +20,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="process.html">My Process</a></li>
       <li><a href="branding.html" aria-current="page">Branding</a></li>
+      <li><a href="digital-tools.html">Digital Tools</a></li>
       <li><a href="photography.html">Photography</a></li>
       <li><a href="strategy.html">Strategy</a></li>
       <li><a href="personal.html">Personal</a></li>
@@ -34,188 +35,78 @@
     <div class="container">
       <span class="eyebrow">Branding</span>
       <h1>Brand and creative work for EcoAct &amp; SE Advisory Services</h1>
-      <p class="lede">Report and factsheet design, campaign creative, website rebrands and digital tool content for Schneider Electric's sustainability advisory business. Eleven creative pieces below — covers and descriptions are being added as originals are sourced.</p>
+      <p class="lede">Report and factsheet design, campaign creative and website rebrands for Schneider Electric's sustainability advisory business. Eleven creative pieces below — covers and descriptions are being added as originals are sourced.</p>
       <p class="callout"><strong>A note on the images on this page:</strong> save each cover image into its matching folder under <code>assets/images/branding/&lt;project&gt;/</code> using the filename referenced in this page's HTML, and the placeholder will be replaced by the real image with no other changes needed.</p>
     </div>
   </section>
 
   <!-- =========================================================
-       DIGITAL TOOLS — first four subsections as a 2x2 grid, per
-       Joe: (Climate Data Analytics, Interconnected Suite of Tools)
-       paired top row, (Product Showcase, Animated demos) paired
-       bottom row. Each cell is heading -> media -> text, stacked
-       (rather than the earlier side-by-side media+text) since a
-       half-width column doesn't leave enough room for a text column
-       next to a video/image and still read comfortably.
-       AI-enabled tools and Modernisation Representations stay as
-       their own full-width sections below, unchanged.
-       Same curve-carousel-block / video-embed components as
-       elsewhere (see site.js). The individual tool case-study pages
-       (tool-carbon-pricing.html, tool-eclr.html, tool-craft.html)
-       stay hidden from navigation rather than deleted — these
-       galleries are how each tool is browsed instead.
+       BRAND EVOLUTION — the same underlying brand changed shape
+       four times over the years Joe marketed it: independent EcoAct,
+       through two acquisitions, to SE Advisory Services launching as
+       its own brand. Reuses the .timeline component built for My
+       Process's career timeline (scroll-reveal + progress line, see
+       "process page: animated timeline" in site.js) — id-free/
+       selector-scoped, so it works here with zero JS changes since
+       process.html and this page never render at the same time.
+       Stage copy is intentionally left as needs-input placeholders —
+       I know the four stage names Joe gave me but not the specifics
+       of what changed at each one, so I'm not filling that in myself.
        ========================================================= -->
   <section class="tight">
     <div class="container">
-      <span class="eyebrow">Digital Tools</span>
-      <h2>Digital Tools</h2>
-      <!-- align-items:start rather than the grid default (stretch) —
-           stretch was forcing every cell in a row to the height of
-           its tallest neighbour, leaving a large blank gap under
-           whichever cell's own content (video/carousel + text)
-           happened to be shorter. -->
-      <div class="grid grid--2" style="row-gap:56px; column-gap:36px; align-items:start;">
+      <span class="eyebrow">Brand Evolution</span>
+      <h2>From independent brand to SE Advisory Services</h2>
+      <p class="lede">Over nearly seven years, the brand I was marketing changed shape four times — from an independent EcoAct, through two acquisitions, to the eventual launch of SE Advisory Services as its own brand. Each stage meant rethinking how the brand looked, sounded and positioned itself.</p>
 
-        <div>
-          <h3>Climate Data Analytics</h3>
-          <!-- Autoplaying, silent, looping — it's meant to catch the
-               eye while scrolling past rather than be watched with
-               sound. muted+playsinline is required for autoplay to
-               actually be allowed by the browser. -->
-          <div class="media-placeholder--wide" style="background:none; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--line); margin-bottom:14px;">
-            <video style="width:100%; height:100%; object-fit:cover; display:block;" autoplay loop muted playsinline aria-label="Screen recording of Climate Data Analytics dashboard improvements">
-              <source src="assets/video/tools/cda-screenshot-improvements.mp4" type="video/mp4">
-              <source src="assets/video/tools/cda-screenshot-improvements.webm" type="video/webm">
-            </video>
-          </div>
-          <p>As lead marketer for our Climate Data Analytics (CDA) tools, I worked cross-functionally with developers, sales and advisory teams to shape the product roadmap and go-to-market strategy.</p>
+      <div class="timeline">
+        <div class="timeline__item">
+          <h3>EcoAct — an independent brand</h3>
+          <p class="needs-input">Needs your input — what the brand looked and sounded like as an independent company, and your role in it.</p>
         </div>
-
-        <div>
-          <h3>Interconnected Suite of Tools</h3>
-          <!-- The image is a .lightbox-img, reusing the
-               click-to-enlarge component already built for
-               Photography (#lightbox overlay near the end of this
-               page) rather than a second one-off viewer. -->
-          <div class="media-placeholder--wide" style="background:none; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--line); margin-bottom:14px;">
-            <img class="lightbox-img" src="assets/images/tools/cda-menu.jpg" alt="The Climate Data Analytics tools menu — Free frameworks assessor, Decarbonisation Tool, Carbon and Energy Pricing Tool, Supplier Engagement Tool and Climate Risk Tool, each with a shared icon style" style="width:100%; height:100%; object-fit:cover; display:block;">
-          </div>
-          <p>I planned to unify a fragmented toolset into a single, coherent suite, renaming each tool to reflect its actual purpose and to enhance its performance in SERPs. I designed a shared iconographic system to visually unite them, laying the groundwork for full platform integration. However, this work was paused when Schneider Electric acquired SE Advisory Services, pending a combined software strategy.</p>
+        <div class="timeline__item">
+          <h3>EcoAct, an Atos company</h3>
+          <p class="needs-input">Needs your input — what changed when EcoAct became part of Atos.</p>
         </div>
-
-        <div>
-          <h3>Product Showcase</h3>
-          <!-- Live YouTube embed, autoplaying and looping from load
-               rather than the earlier click-to-play local file — per
-               Joe's request. autoplay=1 only actually plays in a
-               browser when the embed is also muted (YouTube's own
-               autoplay policy, same reasoning as the local
-               autoplay/muted clips elsewhere on this page); loop=1
-               needs playlist=<same video ID> or YouTube won't loop a
-               single video. Viewers can unmute via the player's own
-               controls if they want the sound. -->
-          <div class="video-embed" style="margin-bottom:14px;">
-            <iframe src="https://www.youtube-nocookie.com/embed/7rget6wf3fk?autoplay=1&mute=1&loop=1&playlist=7rget6wf3fk&rel=0&modestbranding=1&playsinline=1" title="ECLR product showcase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
-          <p>Rather than a static screenshot or a raw screen recording, I chose a fast, visually driven reveal to move through the platform's capabilities in seconds. It's a format built to stop a scroll, hold attention, and get a viewer through the whole feature set before their patience runs out — the one I reach for whenever a tool has more to show than a single image can carry, but not enough time to earn a full guided walkthrough.</p>
+        <div class="timeline__item">
+          <h3>EcoAct, part of Schneider Electric</h3>
+          <p class="needs-input">Needs your input — what changed when EcoAct became part of Schneider Electric.</p>
         </div>
+        <div class="timeline__item">
+          <h3>SE Advisory Services — the brand launch</h3>
+          <p>The final stage: launching SE Advisory Services as its own brand, with sizzle videos, launch imagery, and a set of branded templates and assets designed to give every future piece of content a consistent base to build from.</p>
+          <p class="needs-input">Needs your input — replace the placeholders below with the real launch videos, images and template files.</p>
 
-        <div>
-          <h3>Animated demos</h3>
-          <div class="curve-carousel-block" style="margin-bottom:14px;">
-            <div class="curve-carousel-wrap">
-              <button type="button" class="curve-carousel__arrow curve-carousel__arrow--prev" aria-label="Previous">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <div class="curve-carousel">
-                <div class="curve-carousel__track">
-                  <div class="curve-carousel__slide" data-label="Climate Hazards">
-                    <video autoplay loop muted playsinline poster="assets/images/tools/eclr/poster-climate-hazards.jpg" aria-label="ECLR — Climate Hazards tab, screen recording">
-                      <source src="assets/video/eclr/eclr-climate-hazards-short.mp4" type="video/mp4">
-                      <source src="assets/video/eclr/eclr-climate-hazards-short.webm" type="video/webm">
-                    </video>
-                  </div>
-                  <div class="curve-carousel__slide" data-label="Climate Indicators">
-                    <video autoplay loop muted playsinline poster="assets/images/tools/eclr/poster-climate-indicators.jpg" aria-label="ECLR — Climate Indicators tab, screen recording">
-                      <source src="assets/video/eclr/eclr-climate-indicators.mp4" type="video/mp4">
-                      <source src="assets/video/eclr/eclr-climate-indicators.webm" type="video/webm">
-                    </video>
-                  </div>
-                  <div class="curve-carousel__slide" data-label="Site Report">
-                    <video autoplay loop muted playsinline poster="assets/images/tools/eclr/poster-site-report.jpg" aria-label="ECLR — Site Report tab, screen recording">
-                      <source src="assets/video/eclr/eclr-site-report.mp4" type="video/mp4">
-                      <source src="assets/video/eclr/eclr-site-report.webm" type="video/webm">
-                    </video>
-                  </div>
-                </div>
+          <div style="margin:22px 0;">
+            <span class="eyebrow" style="margin-bottom:0.5em;">Sizzle videos</span>
+            <div class="grid grid--2">
+              <div class="video-embed" data-youtube="" data-title="SE Advisory Services launch — sizzle video 1">
+                <div class="video-embed__thumb"><span class="video-embed__play" aria-hidden="true"></span></div>
               </div>
-              <button type="button" class="curve-carousel__arrow curve-carousel__arrow--next" aria-label="Next">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-            </div>
-            <div class="curve-carousel__caption">
-              <span class="curve-carousel__pill">Climate Hazards</span>
+              <div class="video-embed" data-youtube="" data-title="SE Advisory Services launch — sizzle video 2">
+                <div class="video-embed__thumb"><span class="video-embed__play" aria-hidden="true"></span></div>
+              </div>
             </div>
           </div>
-          <p>To bring a tool to life beyond a static screenshot, I used screen recordings like these to demonstrate it in action — the same clips fed into YouTube playlists of demos and walkthrough tutorials, used to build buy-in with prospects and drive adoption once a tool was live internally. Three of the ECLR platform's report tabs, screen-recorded live, above.</p>
-        </div>
 
-      </div>
-    </div>
-  </section>
+          <div style="margin:22px 0;">
+            <span class="eyebrow" style="margin-bottom:0.5em;">Launch imagery</span>
+            <div class="grid grid--3">
+              <div class="media-placeholder"><span class="media-placeholder__label">Launch photo</span></div>
+              <div class="media-placeholder"><span class="media-placeholder__label">Launch photo</span></div>
+              <div class="media-placeholder"><span class="media-placeholder__label">Launch photo</span></div>
+            </div>
+          </div>
 
-  <section class="tight">
-    <div class="container" style="margin-bottom:6px;">
-      <h2>AI-enabled tools, built by our experts</h2>
-      <p style="max-width:66ch;">We recognised that one of our unique selling points or elements that separated our tools and platforms from the rest was the connection to the advisory services and the experts that built the tools based on years of experience, so we ensured our team were kept visible in our content and communications. We also know from experience that our content with smiling faces in performs best, because people respond to people. It's just basic psychology!</p>
-    </div>
-    <div class="curve-carousel-block">
-      <div class="curve-carousel-wrap">
-        <div class="curve-carousel">
-          <div class="curve-carousel__track">
-            <div class="curve-carousel__slide" data-label="SEED brochure design">
-              <img src="assets/images/featured-work/seed-brochure-mockup.jpg" alt="Mockup of the SEED (Supplier Emissions Engagement and Decarbonisation) brochure, cover and laptop screen against a teal background" draggable="false">
+          <div>
+            <span class="eyebrow" style="margin-bottom:0.5em;">Branded templates &amp; assets</span>
+            <div class="grid grid--3">
+              <div class="media-placeholder"><span class="media-placeholder__label">Template</span></div>
+              <div class="media-placeholder"><span class="media-placeholder__label">Template</span></div>
+              <div class="media-placeholder"><span class="media-placeholder__label">Template</span></div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="curve-carousel__caption">
-        <span class="curve-carousel__pill">SEED brochure design</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="tight">
-    <div class="container" style="margin-bottom:6px;">
-      <h2>Modernisation Representations</h2>
-      <p style="max-width:66ch;">While CRaFT was undergoing an update to modernise its interface, the real screens weren't ready to show. I recreated representative screenshots and graphs instead — visuals accurate enough to stand in for the live product and keep marketing materials moving without waiting on the rebuild.</p>
-    </div>
-
-    <div class="container" style="margin:28px 0 6px;">
-      <h3>Carbon Reduction and Feasibility Tool (CRaFT)</h3>
-      <p style="max-width:66ch;">Forecasts, sets and tracks science-based emissions targets from target-setting through to net-zero.</p>
-    </div>
-    <div class="curve-carousel-block" style="margin-bottom:44px;">
-      <div class="curve-carousel-wrap">
-        <div class="curve-carousel">
-          <div class="curve-carousel__track">
-            <div class="curve-carousel__slide" data-label="CRaFT — screenshots coming soon">
-              <div class="media-placeholder"><span class="media-placeholder__label">CRaFT<br>screenshots coming soon</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="curve-carousel__caption">
-        <span class="curve-carousel__pill">CRaFT — screenshots coming soon</span>
-      </div>
-    </div>
-
-    <div class="container" style="margin-bottom:6px;">
-      <h3>Carbon and Energy Pricing Tool</h3>
-      <p style="max-width:66ch;">Models a business's exposure to regulatory and internal carbon pricing, scenario by scenario, through to 2050.</p>
-    </div>
-    <div class="curve-carousel-block">
-      <div class="curve-carousel-wrap">
-        <div class="curve-carousel">
-          <div class="curve-carousel__track">
-            <div class="curve-carousel__slide" data-label="Carbon Pricing Tool — screenshots coming soon">
-              <div class="media-placeholder"><span class="media-placeholder__label">Carbon Pricing Tool<br>screenshots coming soon</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="curve-carousel__caption">
-        <span class="curve-carousel__pill">Carbon Pricing Tool — screenshots coming soon</span>
       </div>
     </div>
   </section>
@@ -365,22 +256,7 @@
   </div>
 </footer>
 
-<!-- Click-to-enlarge overlay for .lightbox-img elements on this page
-     (currently just the CDA menu screenshot) — same component as
-     Photography's, see "photography lightbox" in site.js. -->
-<div class="lightbox" id="lightbox" hidden>
-  <button type="button" class="lightbox__close" aria-label="Close">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-  </button>
-  <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <img class="lightbox__image" id="lightboxImage" src="" alt="">
-  <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-</div>
-
 <script src="assets/js/site.js"></script>
 </body>
 </html>
+
