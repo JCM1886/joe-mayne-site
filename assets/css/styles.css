@@ -492,6 +492,28 @@ section + section { border-top: 1px solid var(--line-soft); }
 .media-placeholder--wide { aspect-ratio: 16 / 9; }
 .media-placeholder--tall { aspect-ratio: 3 / 4; }
 
+/* ---------- statement banner (home, above Featured Work) ---------- */
+/* Thin, solid-colour strip — deliberately smaller and flatter than
+   the .quote-band treatment (no gradient, no section padding) so the
+   two read as different things despite sharing the same green family,
+   per Joe's "the green again, but distinct" request. Contrast: same
+   paper-on-moss pairing already verified at 5.10:1 for the quote
+   band, comfortably clears WCAG AA. */
+.statement-banner {
+  background: var(--moss);
+  border-top: none;
+  padding: 16px 0;
+}
+.statement-banner p {
+  margin: 0;
+  color: var(--paper);
+  font-size: 0.98rem;
+  font-weight: 500;
+  text-align: center;
+  max-width: 62ch;
+  margin: 0 auto;
+}
+
 /* ---------- featured work (curved carousel) ---------- */
 /* Large slides on a horizontal scroller; site.js computes each
    slide's distance from the carousel's centre on every scroll frame
@@ -807,6 +829,17 @@ section + section { border-top: 1px solid var(--line-soft); }
 .quote-band .eyebrow { color: var(--paper); opacity: 0.85; }
 .quote-band .quote-carousel__item { color: var(--paper); }
 .quote-band .quote-carousel__item cite { color: color-mix(in srgb, var(--paper) 78%, transparent); }
+/* Each name links to their LinkedIn — real people, checkable, not
+   just a name typed in. Underlined rather than colour-differentiated
+   (the usual link treatment would be too close to the surrounding
+   dimmed cite colour to read as a link on this background). */
+.quote-band .quote-carousel__item cite a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--paper) 45%, transparent);
+  text-underline-offset: 3px;
+}
+.quote-band .quote-carousel__item cite a:hover { color: var(--paper); text-decoration-color: var(--paper); }
 .quote-band .quote-carousel__dots button { background: color-mix(in srgb, var(--paper) 35%, transparent); }
 .quote-band .quote-carousel__dots button.is-active { background: var(--paper); }
 .quote-band .btn--primary { background: var(--paper); color: var(--moss-deep); }
