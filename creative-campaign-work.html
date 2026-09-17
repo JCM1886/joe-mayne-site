@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Joe Mayne</title>
-<meta name="description" content="Get in touch with Joe Mayne — Bristol-based Senior Digital Marketer, open to remote, hybrid or roles based in Bristol and the South West.">
+<title>Creative and Campaign Work — Joe Mayne</title>
+<meta name="description" content="Report design, website rebrands and ad campaign work for EcoAct / SE Advisory Services.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
     <ul class="nav__links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li class="nav__dropdown">
-        <a href="creative-campaign-work.html" class="nav__dropdown-toggle">
+        <a href="creative-campaign-work.html" class="nav__dropdown-toggle is-current" aria-current="page">
           Creative and campaign work
           <svg class="nav__dropdown-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -32,7 +32,7 @@
       </li>
       <li><a href="photography.html">Photography</a></li>
       <li><a href="personal.html">Personal</a></li>
-      <li><a href="contact.html" aria-current="page">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </header>
@@ -41,49 +41,43 @@
 
   <section class="page-header">
     <div class="container">
-      <span class="eyebrow">Contact</span>
-      <h1>Let's talk</h1>
-      <p class="lede">I'm currently exploring new opportunities in marketing leadership, particularly with sustainability and purpose-driven organisations. Based in Bristol, UK — open to remote, hybrid or Bristol-based roles.</p>
+      <span class="eyebrow">Creative and campaign work</span>
+      <h1>Report design, website rebrands and ad campaigns</h1>
+      <p class="lede">A selection of the creative and campaign work produced for EcoAct / SE Advisory Services — covers and descriptions are being added as originals are sourced.</p>
     </div>
   </section>
 
   <section class="tight">
-    <div class="container grid grid--2">
-      <div>
-        <span class="eyebrow">Direct</span>
-        <p>
-          Email: <a href="mailto:joemichaelmayne@gmail.com">joemichaelmayne@gmail.com</a><br>
-          LinkedIn: <a href="https://www.linkedin.com/in/joe-michael-mayne/" target="_blank" rel="noopener">/joe-michael-mayne/</a><br>
-          Malt: <a href="https://www.malt.com/profile/joemayne" target="_blank" rel="noopener">/profile/joemayne</a><br>
-          GitHub: <a href="https://github.com/JCM1886" target="_blank" rel="noopener">github.com/JCM1886</a>
-        </p>
-      </div>
+    <div class="container">
+      <div class="grid grid--3" id="branding-grid">
 
-      <div>
-        <span class="eyebrow">Send a message</span>
-        <!-- Submits straight to Formspree (https://formspree.io/f/xzebqyzb)
-             via fetch() in assets/js/site.js — no mail client popup, no
-             leaving the page. A confirmation/error message appears in
-             #formStatus below the button. If JavaScript is off, the form
-             still works as a plain POST and Formspree redirects back with
-             its own thank-you page. To point this at a different
-             Formspree form later, change only the action="..." URL. -->
-        <form id="contactForm" action="https://formspree.io/f/xzebqyzb" method="POST">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required>
+        <div class="card">
+          <div class="media-placeholder"><span class="media-placeholder__label">Annual Sustainability<br>Report cover</span></div>
+          <div class="card__body">
+            <h3>Annual Sustainability Report Design and Promotion</h3>
+            <p class="needs-input">Needs your input</p>
+            <p>What it was, your role, and the outcome — drop the real description in here.</p>
           </div>
-          <div class="field">
-            <label for="email">Your email</label>
-            <input id="email" name="email" type="email" required>
+        </div>
+
+        <div class="card">
+          <div class="media-placeholder"><span class="media-placeholder__label">EcoAct Website<br>Rebrand cover</span></div>
+          <div class="card__body">
+            <h3>EcoAct Website Rebrand</h3>
+            <p class="needs-input">Needs your input</p>
+            <p>What it was, your role, and the outcome — drop the real description in here.</p>
           </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <div class="card">
+          <div class="media-placeholder"><span class="media-placeholder__label">Retargeting Ad<br>Campaign cover</span></div>
+          <div class="card__body">
+            <h3>Retargeting Ad Campaign</h3>
+            <p class="needs-input">Needs your input</p>
+            <p>What it was, your role, and the outcome — drop the real description in here.</p>
           </div>
-          <button class="btn btn--primary" type="submit">Send</button>
-          <p class="form-status" id="formStatus" hidden></p>
-        </form>
+        </div>
+
       </div>
     </div>
   </section>

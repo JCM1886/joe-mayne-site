@@ -149,29 +149,33 @@ section + section { border-top: 1px solid var(--line-soft); }
 .nav__links a:hover { background: var(--moss-pale); color: var(--moss-deep); }
 .nav__links a[aria-current="page"] { background: var(--ink); color: var(--sand); }
 
-/* Dropdown nav item ("Creative and campaign work") — desktop opens on
-   hover/focus, click toggles .is-open for touch/keyboard use (JS in
-   site.js); the .is-current class matches the existing a[aria-current]
-   pill treatment so the group still reads as "you are here" when one
-   of its children is the active page. */
+/* Dropdown nav item ("Creative and campaign work") — the toggle is a
+   real link to that group's own overview page; desktop reveals the
+   submenu of its four sub-pages on hover/focus (:focus-within covers
+   keyboard Tab-through), no click/JS needed. The .is-current class
+   matches the existing a[aria-current] pill treatment so the group
+   still reads as "you are here" when one of its children is active,
+   and carries aria-current="page" itself when it's the active page.
+   Selectors here are `.nav__links .nav__dropdown-toggle` rather than
+   the bare class so they reliably out-specificity the generic
+   `.nav__links a` rules above (equal class count, but this one also
+   matches on the more specific ancestor). */
 .nav__dropdown { position: relative; }
 
-.nav__dropdown-toggle {
+.nav__links .nav__dropdown-toggle {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 8px 14px;
   border-radius: 999px;
-  border: none;
-  background: none;
   font-family: var(--font-body);
   font-size: 0.95rem;
   color: var(--ink-soft);
-  cursor: pointer;
+  text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease;
 }
-.nav__dropdown-toggle:hover { background: var(--moss-pale); color: var(--moss-deep); }
-.nav__dropdown-toggle.is-current { background: var(--ink); color: var(--sand); }
+.nav__links .nav__dropdown-toggle:hover { background: var(--moss-pale); color: var(--moss-deep); }
+.nav__links .nav__dropdown-toggle.is-current { background: var(--ink); color: var(--sand); }
 .nav__dropdown-caret { transition: transform 0.15s ease; }
 
 .nav__dropdown-menu {
@@ -206,13 +210,11 @@ section + section { border-top: 1px solid var(--line-soft); }
 .nav__dropdown-menu a[aria-current="page"] { background: var(--ink); color: var(--sand); }
 
 .nav__dropdown:hover .nav__dropdown-menu,
-.nav__dropdown:focus-within .nav__dropdown-menu,
-.nav__dropdown.is-open .nav__dropdown-menu {
+.nav__dropdown:focus-within .nav__dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-.nav__dropdown.is-open .nav__dropdown-caret { transform: rotate(180deg); }
 
 .nav__toggle {
   display: none;
@@ -240,18 +242,16 @@ section + section { border-top: 1px solid var(--line-soft); }
   .nav__links.is-open { display: flex; }
   .nav__links a { padding: 12px 10px; border-radius: var(--radius-sm); }
 
-  /* The mobile menu is already a full drawer, so the dropdown group
-     just renders open/inline — a second layer of tap-to-reveal on top
-     of the drawer would be one interaction too many. */
-  .nav__dropdown-toggle {
+  /* The mobile menu is already a full drawer, so the dropdown group's
+     four sub-pages render open/inline underneath the toggle rather
+     than needing a second layer of tap-to-reveal. The toggle itself
+     stays a real, tappable link straight through to its overview page. */
+  .nav__links .nav__dropdown-toggle {
     width: 100%;
     justify-content: space-between;
     padding: 12px 10px;
-    pointer-events: none;
-    color: var(--ink);
-    font-weight: 500;
+    border-radius: var(--radius-sm);
   }
-  .nav__dropdown-toggle.is-current { background: none; color: var(--ink); }
   .nav__dropdown-caret { display: none; }
   .nav__dropdown-menu {
     position: static;

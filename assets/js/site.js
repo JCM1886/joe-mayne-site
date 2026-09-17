@@ -27,31 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ---- nav dropdown ("Creative and campaign work") ----
-  // Desktop shows it on hover/focus via CSS alone; this click handler
-  // is what makes it usable on touch (no hover) and via keyboard/screen
-  // readers. Closes on an outside click or Escape.
-  var navDropdown = document.querySelector(".nav__dropdown");
-  var navDropdownToggle = document.querySelector(".nav__dropdown-toggle");
-  if (navDropdown && navDropdownToggle) {
-    navDropdownToggle.addEventListener("click", function () {
-      var open = navDropdown.classList.toggle("is-open");
-      navDropdownToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    document.addEventListener("click", function (e) {
-      if (!navDropdown.contains(e.target)) {
-        navDropdown.classList.remove("is-open");
-        navDropdownToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        navDropdown.classList.remove("is-open");
-        navDropdownToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-
   // ---- curved scroll carousel (featured work, digital tool galleries) ----
   // On every scroll frame, work out each slide's horizontal distance
   // from the carousel's own centre, normalise it to -1..1, and turn
