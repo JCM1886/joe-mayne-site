@@ -18,11 +18,19 @@
     <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <ul class="nav__links" id="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="process.html">My Process</a></li>
-      <li><a href="branding.html">Branding</a></li>
-      <li><a href="digital-tools.html">Digital Tools</a></li>
+      <li class="nav__dropdown">
+        <button type="button" class="nav__dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Creative and campaign work
+          <svg class="nav__dropdown-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="nav__dropdown-menu">
+          <li><a href="process.html">My Process</a></li>
+          <li><a href="branding.html">Branding</a></li>
+          <li><a href="digital-tools.html">Digital Tools</a></li>
+          <li><a href="strategy.html">Strategy</a></li>
+        </ul>
+      </li>
       <li><a href="photography.html">Photography</a></li>
-      <li><a href="strategy.html">Strategy</a></li>
       <li><a href="personal.html">Personal</a></li>
       <li><a href="contact.html" aria-current="page">Contact</a></li>
     </ul>
