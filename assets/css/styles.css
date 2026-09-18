@@ -114,7 +114,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 22px;
+  padding: 18px 28px;
   max-width: var(--max);
   margin: 0 auto;
 }
@@ -131,7 +131,7 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .nav__links {
   display: flex;
-  gap: 3px;
+  gap: 6px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -139,7 +139,7 @@ section + section { border-top: 1px solid var(--line-soft); }
 
 .nav__links a {
   display: inline-block;
-  padding: 8px 11px;
+  padding: 8px 14px;
   border-radius: 999px;
   font-size: 0.95rem;
   color: var(--ink-soft);
@@ -148,6 +148,75 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 .nav__links a:hover { background: var(--moss-pale); color: var(--moss-deep); }
 .nav__links a[aria-current="page"] { background: var(--ink); color: var(--sand); }
+
+/* Dropdown nav item ("Marketing") — a group heading with no page of
+   its own, so it's a <button>, not a link. Desktop reveals its four
+   sub-pages on hover or keyboard focus (:focus-within); the click
+   handler in site.js is what makes it reachable on touch, where
+   there's no hover. The .is-current class matches the a[aria-current]
+   pill treatment so the group still reads as "you are here" when one
+   of its children is the active page. Selectors use
+   `.nav__links .nav__dropdown-toggle` (two classes) rather than the
+   bare class so they reliably out-specificity `.nav__links a` above. */
+.nav__dropdown { position: relative; }
+
+.nav__links .nav__dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav__links .nav__dropdown-toggle:hover { background: var(--moss-pale); color: var(--moss-deep); }
+.nav__links .nav__dropdown-toggle.is-current { background: var(--ink); color: var(--sand); }
+.nav__dropdown-caret { transition: transform 0.15s ease; }
+.nav__dropdown.is-open .nav__dropdown-caret { transform: rotate(180deg); }
+
+.nav__dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: max-content;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  z-index: 60;
+}
+.nav__dropdown-menu a {
+  display: block;
+  padding: 9px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.nav__dropdown-menu a:hover { background: var(--moss-pale); color: var(--moss-deep); }
+.nav__dropdown-menu a[aria-current="page"] { background: var(--ink); color: var(--sand); }
+
+.nav__dropdown:hover .nav__dropdown-menu,
+.nav__dropdown:focus-within .nav__dropdown-menu,
+.nav__dropdown.is-open .nav__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
 .nav__toggle {
   display: none;
@@ -160,11 +229,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   cursor: pointer;
 }
 
-/* Raised from 780px: with 9 flat nav items (adding "Creative &
-   Campaign") the links row needs real width to lay out on one line
-   without wrapping/overflowing — below that it switches to the same
-   mobile drawer pattern a bit earlier than before. */
-@media (max-width: 1250px) {
+@media (max-width: 780px) {
   .nav__toggle { display: inline-block; }
   .nav__links {
     display: none;
@@ -178,6 +243,28 @@ section + section { border-top: 1px solid var(--line-soft); }
   }
   .nav__links.is-open { display: flex; }
   .nav__links a { padding: 12px 10px; border-radius: var(--radius-sm); }
+
+  /* The mobile menu is already a full drawer, so the Marketing group's
+     four sub-pages render open/inline underneath the toggle rather
+     than needing a second layer of tap-to-reveal. */
+  .nav__links .nav__dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 10px;
+    border-radius: var(--radius-sm);
+  }
+  .nav__dropdown-caret { display: none; }
+  .nav__dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 0 14px;
+    margin-top: 2px;
+  }
+  .nav__dropdown-menu a { padding: 10px; }
 }
 
 /* ---------- hero ---------- */

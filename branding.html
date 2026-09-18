@@ -19,11 +19,19 @@
     <ul class="nav__links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="process.html">My Process</a></li>
-      <li><a href="branding.html" aria-current="page">Branding</a></li>
-      <li><a href="creative-campaign-work.html">Creative &amp; Campaign</a></li>
-      <li><a href="digital-tools.html">Digital Tools</a></li>
+      <li class="nav__dropdown">
+        <button type="button" class="nav__dropdown-toggle is-current" aria-haspopup="true" aria-expanded="false">
+          Marketing
+          <svg class="nav__dropdown-caret" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="nav__dropdown-menu">
+          <li><a href="strategy.html">Strategy</a></li>
+          <li><a href="branding.html" aria-current="page">Branding</a></li>
+          <li><a href="creative-campaign-work.html">Creative &amp; Campaign</a></li>
+          <li><a href="digital-tools.html">Digital Tools</a></li>
+        </ul>
+      </li>
       <li><a href="photography.html">Photography</a></li>
-      <li><a href="strategy.html">Strategy</a></li>
       <li><a href="personal.html">Personal</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -82,21 +90,25 @@
             <span class="eyebrow" style="margin-bottom:0.5em;">Teaser videos</span>
             <p>A series of teaser videos created to engage our audience and subtly introduce them to elements of the new brand, ahead of the launch date.</p>
             <div class="grid grid--2">
-              <div class="video-embed" data-youtube="" data-title="SE Advisory Services launch — teaser video 1">
-                <div class="video-embed__thumb"><span class="video-embed__play" aria-hidden="true"></span></div>
+              <div class="video-embed" data-youtube="3GNHgEpWuKE" data-title="SE Advisory Services launch — teaser video 1">
+                <div class="video-embed__thumb" style="background-image:url('https://img.youtube.com/vi/3GNHgEpWuKE/hqdefault.jpg');">
+                  <span class="video-embed__play" aria-hidden="true"></span>
+                </div>
               </div>
-              <div class="video-embed" data-youtube="" data-title="SE Advisory Services launch — teaser video 2">
-                <div class="video-embed__thumb"><span class="video-embed__play" aria-hidden="true"></span></div>
+              <div class="video-embed" data-youtube="y83ZhRTG0KA" data-title="SE Advisory Services launch — teaser video 2">
+                <div class="video-embed__thumb" style="background-image:url('https://img.youtube.com/vi/y83ZhRTG0KA/hqdefault.jpg');">
+                  <span class="video-embed__play" aria-hidden="true"></span>
+                </div>
               </div>
             </div>
+            <p class="needs-input" style="margin-top:10px;">Needs your input — add your YouTube channel link here for "<a href="#">See more of my video content on my YouTube here</a>."</p>
           </div>
 
           <div style="margin:22px 0;">
             <span class="eyebrow" style="margin-bottom:0.5em;">Launch imagery</span>
-            <div class="grid grid--3">
-              <div class="media-placeholder"><span class="media-placeholder__label">Launch photo</span></div>
-              <div class="media-placeholder"><span class="media-placeholder__label">Launch photo</span></div>
-              <div class="media-placeholder"><span class="media-placeholder__label">Launch photo</span></div>
+            <div class="grid grid--2">
+              <img src="assets/images/branding/brand-launch/launch-iceberg.jpg" alt="A warm-toned iceberg at sunset, part of the SE Advisory Services launch imagery" style="border-radius:var(--radius); aspect-ratio:3/2; object-fit:cover; width:100%; display:block;">
+              <img src="assets/images/branding/brand-launch/launch-wave.jpg" alt="A cresting wave against a sunset sky, part of the SE Advisory Services launch imagery" style="border-radius:var(--radius); aspect-ratio:3/2; object-fit:cover; width:100%; display:block;">
             </div>
           </div>
 
