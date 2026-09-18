@@ -170,6 +170,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   background: none;
   font-family: var(--font-body);
   font-size: 0.95rem;
+  line-height: inherit;
   color: var(--ink-soft);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
