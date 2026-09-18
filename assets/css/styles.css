@@ -470,7 +470,7 @@ section + section { border-top: 1px solid var(--line-soft); }
 .btn--accent:hover { background: var(--moss-deep); border-color: var(--moss-deep); color: var(--paper); }
 
 /* ---------- teaser grid (home) ---------- */
-.teasers { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.teasers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 @media (max-width: 980px) { .teasers { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .teasers { grid-template-columns: 1fr; } }
 
@@ -543,6 +543,34 @@ section + section { border-top: 1px solid var(--line-soft); }
 .card__body { padding: 20px 22px; }
 .card h3 { margin-bottom: 0.3em; }
 .card .meta { font-size: 0.85rem; color: var(--ink-faint); margin-bottom: 0.6em; }
+
+/* Auto-crossfading photo gallery — a single frame that fades between
+   several images every few seconds rather than a strip of thumbnails.
+   The wrapper needs an explicit aspect-ratio (set inline per instance)
+   since every image is stacked absolutely on top of it; only
+   .is-active is opaque, and site.js cycles which one carries that
+   class on a plain setInterval (multi-instance safe, same 3s-timer
+   pattern as the quote carousel). Mark whichever <img> should show
+   first with is-active in the HTML — the JS reads that starting state
+   rather than assuming index 0. */
+.photo-fade {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-bottom: 1px solid var(--line);
+}
+.photo-fade__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.photo-fade__img.is-active {
+  opacity: 1;
+}
 
 /* Same lively hover feedback as the homepage's Explore teaser cards
    (border-color shift + a subtle transform on hover), used on the

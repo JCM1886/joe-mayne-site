@@ -290,6 +290,25 @@ document.addEventListener("DOMContentLoaded", function () {
     carousel.addEventListener("focusout", start);
   }
 
+  // ---- photo-fade galleries (Personal page, card thumbnails) ----
+  // Same 3s-interval crossfade as the quote carousel above, just
+  // simpler: no dots, always auto-advancing, one image visible at a
+  // time. Multi-instance safe (forEach), and a no-op for any gallery
+  // that only has a single image.
+  document.querySelectorAll(".photo-fade").forEach(function (fade) {
+    var imgs = Array.prototype.slice.call(fade.querySelectorAll(".photo-fade__img"));
+    if (imgs.length < 2) return;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
+    var current = imgs.findIndex(function (el) { return el.classList.contains("is-active"); });
+    if (current === -1) { current = 0; imgs[0].classList.add("is-active"); }
+    setInterval(function () {
+      imgs[current].classList.remove("is-active");
+      current = (current + 1) % imgs.length;
+      imgs[current].classList.add("is-active");
+    }, 3000);
+  });
+
   // ---- qualifications: overlapping certificate scroller ----
   // Same click-vs-drag distinction as the homepage's curved carousel:
   // a plain click opens the certificate's PDF (the card is a real
