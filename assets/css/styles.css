@@ -572,6 +572,39 @@ section + section { border-top: 1px solid var(--line-soft); }
   opacity: 1;
 }
 
+/* Loose overlapping photo pile — same polaroid look as the Photography
+   page's floating shots (white border, shadow, slight rotation) but
+   static and generously spaced, rather than that page's scroll-driven
+   drift. Plain document flow, not absolute: each image after the
+   first is pulled up with a negative margin-top to overlap the one
+   above it, so the stack's own height (and each breakpoint's) just
+   falls out of the images' natural sizing — no fixed container height
+   to maintain. Margin-top's percentage resolves against the
+   container's width (a CSS quirk, not the image's own height), so
+   -20% comes out to roughly a fifth of the pile overlapping — most of
+   each photo stays visible. Nudge --pile-x per image for the
+   horizontal fan; later images paint over earlier ones by normal DOM
+   order, so put whichever photo should end up on top last in the
+   markup. */
+.photo-stack {
+  padding: 10px 0 30px;
+}
+.photo-stack__img {
+  display: block;
+  width: 80%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  border: 4px solid var(--paper);
+  position: relative;
+  margin-left: var(--pile-x, 0);
+  transform: rotate(var(--pile-rot, 0deg));
+}
+.photo-stack__img:not(:first-child) {
+  margin-top: -20%;
+}
+
 /* Same lively hover feedback as the homepage's Explore teaser cards
    (border-color shift + a subtle transform on hover), used on the
    My Process "Skills" cards - opt-in via this modifier rather than
