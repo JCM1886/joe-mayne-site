@@ -1083,7 +1083,12 @@ section + section { border-top: 1px solid var(--line-soft); }
    base horizontal position/rotation come in via --base-x/--rotation
    inline custom properties; site.js only ever nudges a separate
    --drift property, so it can't fight the base placement. */
-.photo-index { padding: 12px 0 280px; }
+/* section.photo-index (not just .photo-index): this section also
+   carries the shared "tight" class, and section.tight's own padding
+   shorthand has equal-or-higher specificity (a class plus a type
+   selector) — a bare .photo-index rule silently loses that fight, so
+   the extra type selector here is required, not decorative. */
+section.photo-index { padding: 12px 0 520px; }
 /* Positioning context for the floats is the wide container, not the
    narrow text list - they need to sit clear of the list's own
    ~440px width, which "left: 62%" of the list itself can't reach. */
@@ -1120,6 +1125,11 @@ section + section { border-top: 1px solid var(--line-soft); }
 }
 @media (max-width: 900px) {
   .photo-index__float { display: none; }
+  /* The big bottom padding above exists only to give the floats room
+     to spread out below the text list - with them hidden at this
+     width there's nothing to make room for, so drop back to a normal
+     section's spacing instead of leaving a huge empty gap. */
+  section.photo-index { padding-bottom: 56px; }
 }
 @media (max-width: 480px) {
   .photo-index__item a { font-size: 1.5rem; padding: 16px 4px; }
