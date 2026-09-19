@@ -1088,7 +1088,7 @@ section + section { border-top: 1px solid var(--line-soft); }
    shorthand has equal-or-higher specificity (a class plus a type
    selector) — a bare .photo-index rule silently loses that fight, so
    the extra type selector here is required, not decorative. */
-section.photo-index { padding: 12px 0 520px; }
+section.photo-index { padding: 12px 0 680px; }
 /* Positioning context for the floats is the wide container, not the
    narrow text list - they need to sit clear of the list's own
    ~440px width, which "left: 62%" of the list itself can't reach. */
