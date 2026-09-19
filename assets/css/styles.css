@@ -1074,30 +1074,15 @@ section + section { border-top: 1px solid var(--line-soft); }
    ones) lands clear of the sticky header instead of tucked under it. */
 [id] { scroll-margin-top: 90px; }
 
-/* ---------- photography index (jump list + drifting images) ---------- */
-/* Recreates the mechanic: a plain text list of destinations sitting
-   beside a few images that drift sideways with scroll speed and hold
-   a fixed slight rotation, rather than a static flat collage - see
-   the big comment on this section in photography.html, and the
-   "photography index" scroll-velocity code in site.js. Each image's
-   base horizontal position/rotation come in via --base-x/--rotation
-   inline custom properties; site.js only ever nudges a separate
-   --drift property, so it can't fight the base placement. */
-/* section.photo-index (not just .photo-index): this section also
-   carries the shared "tight" class, and section.tight's own padding
-   shorthand has equal-or-higher specificity (a class plus a type
-   selector) — a bare .photo-index rule silently loses that fight, so
-   the extra type selector here is required, not decorative. */
-section.photo-index { padding: 12px 0 680px; }
-/* Positioning context for the floats is the wide container, not the
-   narrow text list - they need to sit clear of the list's own
-   ~440px width, which "left: 62%" of the list itself can't reach. */
-.photo-index .container { position: relative; }
+/* ---------- photography index (jump list + photo stack) ---------- */
+/* Two-column layout (text list + .photo-stack pile) - see the big
+   comment on this section in photography.html. Shares .photo-stack
+   with the Profile page's "My Process" section on purpose, so the
+   sizing/spacing is identical rather than a second hand-tuned copy. */
 .photo-index__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-width: 440px;
 }
 .photo-index__item { border-bottom: 1px solid var(--line-soft); }
 .photo-index__item:first-child { border-top: 1px solid var(--line-soft); }
@@ -1111,26 +1096,6 @@ section.photo-index { padding: 12px 0 680px; }
   transition: color 0.15s ease;
 }
 .photo-index__item a:hover { color: var(--clay-deep); }
-.photo-index__float {
-  position: absolute;
-  left: 71%;
-  width: clamp(110px, 13vw, 200px);
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow);
-  border: 4px solid var(--paper);
-  pointer-events: none;
-  transform: translate(calc(-50% + (var(--base-x, 0) + var(--drift, 0)) * 1px), -50%) rotate(var(--rotation, 0deg));
-}
-@media (max-width: 900px) {
-  .photo-index__float { display: none; }
-  /* The big bottom padding above exists only to give the floats room
-     to spread out below the text list - with them hidden at this
-     width there's nothing to make room for, so drop back to a normal
-     section's spacing instead of leaving a huge empty gap. */
-  section.photo-index { padding-bottom: 56px; }
-}
 @media (max-width: 480px) {
   .photo-index__item a { font-size: 1.5rem; padding: 16px 4px; }
 }

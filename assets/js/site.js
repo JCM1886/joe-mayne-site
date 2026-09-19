@@ -428,40 +428,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   })();
 
-  // ---- photography index: scroll-velocity image drift ----
-  // Each .photo-index__float image's base position/rotation is fixed
-  // via inline --base-x/--rotation custom properties in the HTML;
-  // this only ever nudges a separate --drift property in the same
-  // translateX() expression (see .photo-index__float in styles.css),
-  // so it adds a sideways push proportional to how fast the page is
-  // scrolling without fighting the base layout. Velocity is damped
-  // each frame so the images drift back to rest shortly after
-  // scrolling stops, and each image is staggered slightly (by index)
-  // so they don't all move in lockstep. Skipped entirely under
-  // prefers-reduced-motion - the CSS base position is enough there.
-  (function () {
-    var floats = Array.prototype.slice.call(document.querySelectorAll(".photo-index__float"));
-    if (!floats.length) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    var lastScrollY = window.scrollY;
-    var velocity = 0;
-
-    function tick() {
-      var currentY = window.scrollY;
-      var delta = currentY - lastScrollY;
-      lastScrollY = currentY;
-      velocity += (delta - velocity) * 0.2;
-      var drift = Math.max(-40, Math.min(40, velocity * 2.2));
-      floats.forEach(function (el, i) {
-        var eased = drift * (1 - i * 0.12);
-        el.style.setProperty("--drift", eased.toFixed(2));
-      });
-      window.requestAnimationFrame(tick);
-    }
-    window.requestAnimationFrame(tick);
-  })();
-
   // ---- process page: animated timeline (scroll-reveal + progress line) ----
   // Each .timeline__item fades/slides in (and its dot pops in) the
   // first time it enters the viewport, via IntersectionObserver. A

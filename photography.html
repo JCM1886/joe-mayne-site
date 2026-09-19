@@ -48,30 +48,25 @@
   </section>
 
   <!-- =========================================================
-       PHOTO INDEX — jump-to-category list with drifting images
-       Recreates the mechanic Joe pointed at: a plain text list
-       sitting beside a few images that gently drift sideways with
-       scroll speed and sit at a fixed slight rotation, rather than a
-       flat static collage — rebuilt from scratch in plain CSS/JS
-       (custom properties driven by site.js, not the reference's
-       code, images, or client names), using Joe's own category
-       names and real photos. See "photography index" in site.js for
-       the scroll-velocity drift, and the equivalent comment in
-       styles.css for the layout. Hidden below 900px (drops to a
-       plain list) since there's no room for the floats to breathe
-       and drift is disabled entirely under prefers-reduced-motion. -->
+       PHOTO INDEX — jump-to-category list beside an overlapping
+       photo pile. Same two-column layout and .photo-stack component
+       as the Profile page's "My Process" section (see process.html)
+       — reused deliberately so the sizing/spacing matches exactly,
+       rather than a second hand-tuned version of the same idea. -->
   <section class="tight photo-index">
-    <div class="container">
+    <div class="container grid grid--2" style="align-items:start;">
       <ul class="photo-index__list">
         <li class="photo-index__item"><a href="#event">Event</a></li>
         <li class="photo-index__item"><a href="#wedding">Wedding</a></li>
         <!-- "Corporate" jump link removed while that section is
              hidden below — re-add when it comes back. -->
         <li class="photo-index__item"><a href="#travel">Travel</a></li>
-        <img class="photo-index__float" src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="" style="--base-x:60; --rotation:3deg; top:25%;">
-        <img class="photo-index__float" src="assets/images/photography/travel/travel-vietnam-market-stall.jpg" alt="" style="--base-x:140; --rotation:-4deg; top:100%;">
-        <img class="photo-index__float" src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="" style="--base-x:100; --rotation:-2deg; top:175%;">
       </ul>
+      <div class="photo-stack">
+        <img class="photo-stack__img" style="--pile-x:8%; --pile-rot:-5deg;" src="assets/images/photography/travel/travel-vietnam-market-stall.jpg" alt="A market stall seller surrounded by plush toys">
+        <img class="photo-stack__img" style="--pile-x:0%; --pile-rot:-4deg;" src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="A surfer walking along a beach with a surfboard">
+        <img class="photo-stack__img" style="--pile-x:18%; --pile-rot:3deg;" src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="A cyclist with an umbrella at night, long exposure">
+      </div>
     </div>
   </section>
 
