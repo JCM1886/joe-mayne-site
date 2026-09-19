@@ -1083,7 +1083,7 @@ section + section { border-top: 1px solid var(--line-soft); }
    base horizontal position/rotation come in via --base-x/--rotation
    inline custom properties; site.js only ever nudges a separate
    --drift property, so it can't fight the base placement. */
-.photo-index { padding: 12px 0 64px; }
+.photo-index { padding: 12px 0 180px; }
 /* Positioning context for the floats is the wide container, not the
    narrow text list - they need to sit clear of the list's own
    ~440px width, which "left: 62%" of the list itself can't reach. */
