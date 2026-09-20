@@ -605,6 +605,32 @@ section + section { border-top: 1px solid var(--line-soft); }
   margin-top: -20%;
 }
 
+/* Tight document/PDF mockup stack — same polaroid-style border/shadow
+   as .photo-stack, but pages sit almost directly on top of each
+   other (a few px offset, not a wide fan) so it reads as "a stack of
+   pages" rather than scattered photos. Absolutely positioned within
+   a container sized by aspect-ratio, so the stack's own footprint is
+   predictable and deliberately narrower than its parent — leaving
+   room beside it for more images to be added later. Later images in
+   the markup paint on top, so the cover page goes last. */
+.doc-stack {
+  position: relative;
+  width: 62%;
+  aspect-ratio: 1754 / 1241;
+  margin: 6px 0;
+}
+.doc-stack__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  border: 3px solid var(--paper);
+  transform: translate(var(--pile-x, 0), var(--pile-y, 0)) rotate(var(--pile-rot, 0deg));
+}
+
 /* Same lively hover feedback as the homepage's Explore teaser cards
    (border-color shift + a subtle transform on hover), used on the
    My Process "Skills" cards - opt-in via this modifier rather than
