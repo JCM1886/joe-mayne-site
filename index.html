@@ -62,37 +62,38 @@
            clear because the paragraph is centred with a capped
            max-width (60ch), so there's reliable margin there
            regardless of viewport width. -->
-      <!-- One cluster, top-left: the eyebrow line starts at ~140px
-           down this 600px box (measured directly, not guessed — see
-           scratchpad), and the lede/buttons below fill everything
-           from there almost to the bottom, so there's no safe "lower"
-           spot left the way there might once have been. Every tile
-           here is capped to end by ~134px, comfortably above that
-           140px line, whatever the viewport width (heights are in
-           fixed px, not %, precisely because this box's own height is
-           fixed too). Left offsets are plain px rather than % so they
-           don't drift into the text column as the viewport widens.
-           The ECLR mockup is a transparent PNG (a pre-rendered laptop
-           graphic with its own baked-in shadow), so unlike the others
-           it's shown with object-fit:contain and no card frame of its
-           own — cover+a white rounded box would both crop it and
-           double up the shadow. -->
-      <div class="hero__image" style="top:0px; left:2px; --size:130px; --delay:0; --tilt:-6deg;">
+      <!-- Spread along the top, not clustered in the corner: the
+           eyebrow line AND the headshot both start at exactly the
+           same ~140px down this 600px box, at every viewport width
+           tested (measured directly, not guessed — see scratchpad),
+           so that's a hard ceiling on tile height, but nothing else
+           occupies that top 140px band at any horizontal position —
+           so tiles can spread across the full width freely, just not
+           taller than it. Left offsets are % (safe here, unlike a
+           narrow cluster, since the whole top band is clear at every
+           width) so the spread scales with the viewport instead of
+           bunching at one edge on a wide screen. The ECLR mockup is a
+           transparent PNG (a pre-rendered laptop graphic with its own
+           baked-in shadow), so unlike the others it's shown with
+           object-fit:contain and no card frame of its own — cover+a
+           white rounded box would both crop it and double up the
+           shadow. -->
+      <div class="hero__image" style="top:0px; left:0%; --size:135px; --delay:0; --tilt:-6deg;">
         <div class="hero__image-inner"><img src="assets/images/featured-work/eclr-brochure-mockup.webp" alt="Mockup of the ECLR: EcoAct Climate Risk Platform brochure" style="width:100%; height:100%; object-fit:contain; display:block;"></div>
       </div>
-      <div class="hero__image" style="top:0px; left:140px; --size:80px; --delay:3; --tilt:7deg;">
+      <div class="hero__image" style="top:8px; left:15%; --size:105px; --delay:3; --tilt:7deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="A surfer walking along a beach with a surfboard" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:0px; left:230px; --size:115px; --delay:2; --tilt:8deg;">
+      <div class="hero__image" style="top:0px; left:29%; --size:132px; --delay:2; --tilt:8deg;">
         <div class="hero__image-inner"><img src="assets/images/featured-work/blue-carbon-mockup.jpg" alt="Mockup of the Blue Carbon: Unlocking the potential for net-zero factsheet" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:54px; left:60px; --size:80px; --delay:1; --tilt:-4deg;">
+      <div class="hero__image" style="top:15px; left:45%; --size:100px; --delay:1; --tilt:-4deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="A cyclist with an umbrella at night, long exposure" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:60px; left:200px; --size:70px; --delay:5; --tilt:-7deg;">
+      <div class="hero__image" style="top:0px; left:58%; --size:120px; --delay:5; --tilt:-7deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-vietnam-market-stall.jpg" alt="A market stall seller surrounded by plush toys" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:66px; left:290px; --size:65px; --delay:4; --tilt:5deg;">
+      <div class="hero__image" style="top:20px; left:70%; --size:95px; --delay:4; --tilt:5deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-becak-street.jpg" alt="A cycle-rickshaw driver on a street, long exposure" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
     </div>
