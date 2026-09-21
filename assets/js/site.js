@@ -228,6 +228,82 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   });
 
+  // ---- hero floating-image layout (home) ----
+  // Sizes and positions the 6 work tiles from the *actual* rendered
+  // edges of .hero__content (via getBoundingClientRect), instead of
+  // approximating them with a calc(50vw...) CSS formula. The CSS
+  // version matched headless testing but drifted on a real desktop
+  // browser with a classic (non-overlay) scrollbar — 100vw includes
+  // the scrollbar's own width, while the container itself doesn't
+  // extend under it, so the gutter tiles ended up sitting closer to
+  // the text/headshot than intended. Measuring the box directly fixes
+  // that at the source, on any browser or zoom level, and lets each
+  // tile's size track the real available gutter width rather than a
+  // fixed vw coefficient. The two top-band tiles are simpler: pinned
+  // a fixed px offset from the container's left edge with a small
+  // vertical stagger between them, so they read as two deliberately
+  // placed pieces rather than one mechanical aligned line.
+  (function () {
+    var heroImagesEl = document.querySelector(".hero__images");
+    var containerEl = document.querySelector(".hero--animated .hero__content");
+    if (!heroImagesEl || !containerEl) return;
+    var tiles = Array.prototype.slice.call(heroImagesEl.querySelectorAll(".hero__image"));
+    if (tiles.length < 6) return;
+
+    var MIN_WIDTH = 1280; // matches the CSS breakpoint that hides .hero__images below this
+    var config = [
+      { zone: "top", top: 0, offset: -60, size: 90, sizeMax: 130 },
+      { zone: "top", top: 20, offset: 130, size: 74, sizeMax: 108 },
+      { zone: "left", top: 200, gap: 30, min: 60, max: 170, scale: 0.58 },
+      { zone: "left", top: 420, gap: 36, min: 50, max: 140, scale: 0.48 },
+      { zone: "right", top: 180, gap: 30, min: 60, max: 170, scale: 0.58 },
+      { zone: "right", top: 400, gap: 36, min: 50, max: 140, scale: 0.48 },
+    ];
+
+    function layout() {
+      var vw = window.innerWidth;
+      if (vw < MIN_WIDTH) return;
+      var heroBox = heroImagesEl.getBoundingClientRect();
+      var containerBox = containerEl.getBoundingClientRect();
+      var containerStyle = getComputedStyle(containerEl);
+      var padLeft = parseFloat(containerStyle.paddingLeft) || 0;
+      var padRight = parseFloat(containerStyle.paddingRight) || 0;
+      // getBoundingClientRect() gives the container's outer (border)
+      // box; the text itself starts inside that, past its own left/
+      // right padding, so that padding has to be added/subtracted to
+      // get the edge the tiles should actually respect.
+      var leftEdge = containerBox.left - heroBox.left + padLeft;
+      var rightEdge = containerBox.right - heroBox.left - padRight;
+      var leftGutterWidth = leftEdge;
+      var rightGutterWidth = heroBox.width - rightEdge;
+      var growT = Math.max(0, Math.min(1, (vw - MIN_WIDTH) / 700));
+
+      tiles.forEach(function (el, i) {
+        var c = config[i];
+        var size, left;
+        if (c.zone === "top") {
+          size = c.size + (c.sizeMax - c.size) * growT;
+          left = leftEdge + c.offset;
+        } else if (c.zone === "left") {
+          size = Math.max(c.min, Math.min(c.max, leftGutterWidth * c.scale));
+          left = leftEdge - c.gap - size;
+        } else {
+          size = Math.max(c.min, Math.min(c.max, rightGutterWidth * c.scale));
+          left = rightEdge + c.gap;
+        }
+        el.style.top = c.top + "px";
+        el.style.left = left + "px";
+        el.style.setProperty("--size", size + "px");
+      });
+    }
+
+    layout();
+    window.addEventListener("resize", layout);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(layout);
+    }
+  })();
+
   // ---- hero floating-image parallax (home) ----
   // Subtle depth effect: floating work tiles drift slightly toward
   // the cursor. Skipped entirely on touch devices (no meaningful

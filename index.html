@@ -52,52 +52,45 @@
        up in order across both the name and the tagline. -->
   <section class="hero hero--animated">
     <div class="hero__images" aria-hidden="true">
-      <!-- Both size AND position now scale with viewport width, so the
-           cluster actually grows to fill the extra space on a wide
-           screen instead of staying a fixed size at a fixed distance
-           from the text (that was the previous attempt — same size
-           everywhere, just repositioned, which still read as "moved
-           in" rather than "bigger on a bigger screen").
-           - Top band (top:0, height ≤135px, clear at every width
-             because the eyebrow/headshot both start at a fixed 140px
-             down): sized with clamp(min, Nvw, max) so it grows with
-             the viewport up to the ~135px ceiling that band allows,
-             positioned with left:%, so the two tiles spread further
-             apart as the viewport widens.
-           - Side gutters (full 0-600px height, safe because they sit
-             outside the centred .container entirely — its edges are
-             calc(50vw - 532px) / calc(50vw + 532px) at any width from
-             this 1280px breakpoint up): sized with clamp(min, Nvw,
-             max) so each tile grows with the gutter itself, and
-             positioned by taking that same var(--size) back out of
-             the container edge (left gutter) or adding a fixed gap to
-             it (right gutter) — so a bigger tile grows *into* the
-             gutter (away from the text) rather than *over* it, which
-             keeps this collision-safe by construction at any size,
-             not just the specific widths tested. Still verified with
-             the same Playwright bounding-box check as every previous
-             pass, 1280-1920px.
-           The ECLR mockup is a transparent PNG (a pre-rendered laptop
-           graphic with its own baked-in shadow), so unlike the others
-           it's shown with object-fit:contain and no card frame of its
-           own — cover + a white rounded box would both crop it and
-           double up the shadow. -->
-      <div class="hero__image" style="top:0px; left:2%; --size:clamp(90px, 9vw, 132px); --delay:0; --tilt:-6deg;">
+      <!-- Position/size are set precisely by layoutHeroTiles() in
+           site.js, which measures the real .hero__content box via
+           getBoundingClientRect() rather than approximating it with a
+           calc(50vw...) formula. That vw-based approach matched a
+           headless test cleanly but drifted slightly on a real
+           desktop browser with a classic (non-overlay) scrollbar,
+           since 100vw includes the scrollbar's own width while the
+           actual container doesn't extend under it — enough to read
+           as the gutter tiles crowding the text/headshot on some
+           screens, as reported. Measuring the box directly removes
+           that whole class of drift, on any browser or zoom level,
+           and also gave headroom to widen the tile-to-text gap and
+           stagger the two top-band tiles (previously both pinned to
+           top:0, which read as a flat, mechanical line) — see
+           layoutHeroTiles() for the actual numbers.
+           The inline top/left/--size below are only the pre-JS
+           fallback (same shape, just approximate); every real browser
+           overwrites them on load. The ECLR mockup is a transparent
+           PNG (a pre-rendered laptop graphic with its own baked-in
+           shadow), so unlike the others it's shown with
+           object-fit:contain and no card frame of its own — cover + a
+           white rounded box would both crop it and double up the
+           shadow. -->
+      <div class="hero__image" style="top:0px; left:calc(50vw - 592px); --size:110px; --delay:0; --tilt:-6deg;">
         <div class="hero__image-inner"><img src="assets/images/featured-work/eclr-brochure-mockup.webp" alt="Mockup of the ECLR: EcoAct Climate Risk Platform brochure" style="width:100%; height:100%; object-fit:contain; display:block;"></div>
       </div>
-      <div class="hero__image" style="top:0px; left:26%; --size:clamp(78px, 7.5vw, 128px); --delay:2; --tilt:8deg;">
+      <div class="hero__image" style="top:20px; left:calc(50vw - 402px); --size:90px; --delay:2; --tilt:8deg;">
         <div class="hero__image-inner"><img src="assets/images/featured-work/blue-carbon-mockup.jpg" alt="Mockup of the Blue Carbon: Unlocking the potential for net-zero factsheet" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:190px; --size:clamp(70px, 34vw - 365px, 190px); left:calc(50vw - 532px - 16px - var(--size)); --delay:3; --tilt:7deg;">
+      <div class="hero__image" style="top:200px; --size:clamp(60px, 32vw - 346px, 170px); left:calc(50vw - 532px - 30px - var(--size)); --delay:3; --tilt:7deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-surfer-beach.jpg" alt="A surfer walking along a beach with a surfboard" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:410px; --size:clamp(55px, 26vw - 275px, 150px); left:calc(50vw - 532px - 20px - var(--size)); --delay:5; --tilt:-9deg;">
+      <div class="hero__image" style="top:420px; --size:clamp(50px, 24vw - 256px, 140px); left:calc(50vw - 532px - 36px - var(--size)); --delay:5; --tilt:-9deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-becak-street.jpg" alt="A cycle-rickshaw driver on a street, long exposure" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:170px; --size:clamp(70px, 34vw - 365px, 190px); left:calc(50vw + 532px + 16px); --delay:1; --tilt:-4deg;">
+      <div class="hero__image" style="top:180px; --size:clamp(60px, 32vw - 346px, 170px); left:calc(50vw + 532px + 30px); --delay:1; --tilt:-4deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-night-cyclist.jpg" alt="A cyclist with an umbrella at night, long exposure" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
-      <div class="hero__image" style="top:390px; --size:clamp(55px, 26vw - 275px, 150px); left:calc(50vw + 532px + 20px); --delay:4; --tilt:6deg;">
+      <div class="hero__image" style="top:400px; --size:clamp(50px, 24vw - 256px, 140px); left:calc(50vw + 532px + 36px); --delay:4; --tilt:6deg;">
         <div class="hero__image-inner"><img src="assets/images/photography/travel/travel-vietnam-market-stall.jpg" alt="A market stall seller surrounded by plush toys" style="width:100%; height:100%; object-fit:cover; border-radius:18px; box-shadow:var(--shadow); display:block;"></div>
       </div>
     </div>
