@@ -252,20 +252,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var ASPECT = 16 / 9; // matches .hero__image's CSS aspect-ratio; width drives height
     var MIN_WIDTH = 1280; // matches the CSS breakpoint that hides .hero__images below this
-    // Top-band tiles are constrained by HEIGHT (that band is only
-    // ~135px tall, full width), so they're configured by height and
+    var TEXT_GAP = 50; // minimum breathing room every tile keeps from the text/title, per Joe
+    var CEILING = 140; // eyebrow/headshot both start here, at any width — the top band's hard limit
+    // Top-band tiles are constrained by HEIGHT (that ceiling minus
+    // TEXT_GAP, minus their own top offset), configured by height and
     // converted to the width --size actually drives, via ASPECT — a
     // 16:9 tile can be a lot wider than tall for the same height cap,
     // which uses that band's real bottleneck far better than a square
-    // tile could. Gutter tiles are the opposite: constrained by the
-    // gutter's WIDTH, so they're configured directly in width.
+    // tile could. Gutter tiles are sized as a fraction of whatever
+    // gutter width is left over *after* reserving TEXT_GAP, so the gap
+    // holds by construction at any viewport width, not just the ones
+    // spot-checked — min is chosen low enough that even the narrowest
+    // supported gutter (108px at the 1280px breakpoint) can't clamp a
+    // tile past that reserved gap.
     var config = [
-      { zone: "top", top: 0, offset: -100, heightMin: 95, heightMax: 132 },
-      { zone: "top", top: 15, offset: 220, heightMin: 78, heightMax: 118 },
-      { zone: "left", top: 190, gap: 28, min: 70, max: 300, scale: 0.7 },
-      { zone: "left", top: 460, gap: 34, min: 58, max: 250, scale: 0.6 },
-      { zone: "right", top: 170, gap: 28, min: 70, max: 300, scale: 0.7 },
-      { zone: "right", top: 440, gap: 34, min: 58, max: 250, scale: 0.6 },
+      { zone: "top", top: 0, offset: -80, heightMin: 65, heightMax: CEILING - TEXT_GAP - 0 },
+      { zone: "top", top: 15, offset: 200, heightMin: 55, heightMax: CEILING - TEXT_GAP - 15 },
+      { zone: "left", top: 190, gap: TEXT_GAP, min: 50, max: 320, scale: 0.82 },
+      { zone: "left", top: 460, gap: TEXT_GAP + 4, min: 40, max: 260, scale: 0.75 },
+      { zone: "right", top: 170, gap: TEXT_GAP, min: 50, max: 320, scale: 0.82 },
+      { zone: "right", top: 440, gap: TEXT_GAP + 4, min: 40, max: 260, scale: 0.75 },
     ];
 
     function layout() {
@@ -294,10 +300,10 @@ document.addEventListener("DOMContentLoaded", function () {
           size = height * ASPECT;
           left = leftEdge + c.offset;
         } else if (c.zone === "left") {
-          size = Math.max(c.min, Math.min(c.max, leftGutterWidth * c.scale));
+          size = Math.max(c.min, Math.min(c.max, (leftGutterWidth - c.gap) * c.scale));
           left = leftEdge - c.gap - size;
         } else {
-          size = Math.max(c.min, Math.min(c.max, rightGutterWidth * c.scale));
+          size = Math.max(c.min, Math.min(c.max, (rightGutterWidth - c.gap) * c.scale));
           left = rightEdge + c.gap;
         }
         el.style.top = c.top + "px";
