@@ -252,12 +252,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var MIN_WIDTH = 1280; // matches the CSS breakpoint that hides .hero__images below this
     var config = [
-      { zone: "top", top: 0, offset: -60, size: 90, sizeMax: 130 },
-      { zone: "top", top: 20, offset: 130, size: 74, sizeMax: 108 },
-      { zone: "left", top: 200, gap: 30, min: 60, max: 170, scale: 0.58 },
-      { zone: "left", top: 420, gap: 36, min: 50, max: 140, scale: 0.48 },
-      { zone: "right", top: 180, gap: 30, min: 60, max: 170, scale: 0.58 },
-      { zone: "right", top: 400, gap: 36, min: 50, max: 140, scale: 0.48 },
+      { zone: "top", top: 0, offset: -60, size: 90, sizeMax: 134 },
+      { zone: "top", top: 15, offset: 130, size: 74, sizeMax: 115 },
+      { zone: "left", top: 190, gap: 28, min: 70, max: 220, scale: 0.68 },
+      { zone: "left", top: 450, gap: 34, min: 58, max: 180, scale: 0.56 },
+      { zone: "right", top: 170, gap: 28, min: 70, max: 220, scale: 0.68 },
+      { zone: "right", top: 430, gap: 34, min: 58, max: 180, scale: 0.56 },
     ];
 
     function layout() {
