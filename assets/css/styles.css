@@ -366,9 +366,13 @@ section + section { border-top: 1px solid var(--line-soft); }
 .hero__image {
   position: absolute;
   width: var(--size, 100px);
-  height: var(--size, 100px);
+  aspect-ratio: 16 / 9;
+  height: auto;
   transition: transform 0.2s ease-out;
 }
+/* .hero__headshot (below) sets its own explicit width AND height, which
+   makes the aspect-ratio above a no-op for it — aspect-ratio only fills
+   in a dimension left as "auto". */
 .hero__image-inner {
   width: 100%;
   height: 100%;

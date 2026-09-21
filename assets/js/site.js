@@ -250,14 +250,22 @@ document.addEventListener("DOMContentLoaded", function () {
     var tiles = Array.prototype.slice.call(heroImagesEl.querySelectorAll(".hero__image"));
     if (tiles.length < 6) return;
 
+    var ASPECT = 16 / 9; // matches .hero__image's CSS aspect-ratio; width drives height
     var MIN_WIDTH = 1280; // matches the CSS breakpoint that hides .hero__images below this
+    // Top-band tiles are constrained by HEIGHT (that band is only
+    // ~135px tall, full width), so they're configured by height and
+    // converted to the width --size actually drives, via ASPECT — a
+    // 16:9 tile can be a lot wider than tall for the same height cap,
+    // which uses that band's real bottleneck far better than a square
+    // tile could. Gutter tiles are the opposite: constrained by the
+    // gutter's WIDTH, so they're configured directly in width.
     var config = [
-      { zone: "top", top: 0, offset: -60, size: 90, sizeMax: 134 },
-      { zone: "top", top: 15, offset: 130, size: 74, sizeMax: 115 },
-      { zone: "left", top: 190, gap: 28, min: 70, max: 220, scale: 0.68 },
-      { zone: "left", top: 450, gap: 34, min: 58, max: 180, scale: 0.56 },
-      { zone: "right", top: 170, gap: 28, min: 70, max: 220, scale: 0.68 },
-      { zone: "right", top: 430, gap: 34, min: 58, max: 180, scale: 0.56 },
+      { zone: "top", top: 0, offset: -100, heightMin: 95, heightMax: 132 },
+      { zone: "top", top: 15, offset: 220, heightMin: 78, heightMax: 118 },
+      { zone: "left", top: 190, gap: 28, min: 70, max: 300, scale: 0.7 },
+      { zone: "left", top: 460, gap: 34, min: 58, max: 250, scale: 0.6 },
+      { zone: "right", top: 170, gap: 28, min: 70, max: 300, scale: 0.7 },
+      { zone: "right", top: 440, gap: 34, min: 58, max: 250, scale: 0.6 },
     ];
 
     function layout() {
@@ -282,7 +290,8 @@ document.addEventListener("DOMContentLoaded", function () {
         var c = config[i];
         var size, left;
         if (c.zone === "top") {
-          size = c.size + (c.sizeMax - c.size) * growT;
+          var height = c.heightMin + (c.heightMax - c.heightMin) * growT;
+          size = height * ASPECT;
           left = leftEdge + c.offset;
         } else if (c.zone === "left") {
           size = Math.max(c.min, Math.min(c.max, leftGutterWidth * c.scale));
