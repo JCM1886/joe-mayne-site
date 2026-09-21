@@ -428,12 +428,18 @@ section + section { border-top: 1px solid var(--line-soft); }
   50% { transform: translateY(-16px) rotate(calc(var(--tilt, 0deg) * -1)); }
 }
 
-/* Both remaining tiles sit on the left, clear of the centred,
-   max-width-capped paragraph — verified by measuring actual rendered
-   positions at nine widths from 1040px to 1920px (all clean) before
-   settling on this threshold; below it, the hero's own side padding
-   shrinks enough to erode that margin. */
-@media (max-width: 1040px) {
+/* Tiles live in two kinds of zone, both measured (not guessed) against
+   the actual rendered layout: a top band (0-135px tall, full width)
+   that's clear at every width because the eyebrow and the headshot
+   both start at a fixed 140px down regardless of viewport; and the two
+   side gutters — the empty margin between the centred .container's
+   padding-box edge and the viewport edge, which is safe for the FULL
+   600px height at any width, since it sits entirely outside the
+   container the text and headshot live in. That gutter is only 28px
+   at 1041px, too narrow for a real tile; it doesn't reach a workable
+   width (~108px) until 1280px, so the whole cluster is hidden below
+   that instead of the previous 1040px threshold. */
+@media (max-width: 1279px) {
   .hero__images { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
